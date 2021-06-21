@@ -1,0 +1,7 @@
+[
+	{"label":"Documents", "link":"?page=classesList&module=listmanager", "role": ["admin","editor","reader"]},
+	{"label":"Upload", "link":"#", "role": ["admin","editor","reader"], "sub":[
+		{"label":"Upload File", "link":"?page=uploadcard&module=upload", "role": ["admin","editor","reader"] },
+		{"label":"Upload History", "link":"?page=uploadlist&module=upload", "role": ["admin","editor","reader"] }
+	]}
+]

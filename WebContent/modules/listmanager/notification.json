@@ -1,0 +1,14 @@
+[
+	{
+		"trigger": "bad",
+		"title" : "Warning!",
+		"text" : "Something went wrong. You should try again.",
+		"type" : "alert-danger"
+	},
+	{
+		"trigger": "edit",
+		"title" : "Excellent!",
+		"text" : "You have successfully edited the class!",
+		"type" : "alert-success"
+	}
+]

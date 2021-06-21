@@ -1,0 +1,24 @@
+[
+	{"label":"Admin Panel", "link":"#", "role": ["admin","editor"], "sub":[
+		{"label":"Manage users", "link":"?page=adminPanel&module=usermanager", "role": ["admin"] },
+		{"label":"Manage roles", "link":"?page=rolePanel&module=usermanager", "role": ["admin"] }
+	]},
+	{"label":"Edit", "link":"#", "role": ["admin","editor"], "sub":[
+		{"label":"Add Class", "link":"?page=class&module=ontologyeditor", "role": ["admin","editor"] },
+		{"label":"Add Object Property", "link":"?page=object_property&module=ontologyeditor", "role": ["admin","editor"] },
+		{"label":"Add Datatype Property", "link":"?page=datatype_property&module=ontologyeditor", "role": ["admin","editor"] },
+		{"label":"Add Annotation", "link":"?page=annotation&module=ontologyeditor", "role": ["admin","editor"] },
+		{"label":"Add Individual", "link":"?page=individual&module=ontologyeditor", "role": ["admin","editor"] }
+	]},
+	{"label":"List", "link":"#", "role": ["admin","editor","reader"], "sub":[
+		{"label":"Classes", "link":"?page=classesList&module=listmanager", "role": ["admin","editor","reader"] },
+		{"label":"Object Properties", "link":"?page=object_propertyList&module=listmanager", "role": ["admin","editor","reader"] },
+		{"label":"Datatype Properties", "link":"?page=datatype_propertyList&module=listmanager", "role": ["admin","editor","reader"] },
+		{"label":"Annotations", "link":"?page=annotationList&module=listmanager", "role": ["admin","editor","reader"] },
+		{"label":"Individuals", "link":"?page=individualList&module=listmanager", "role": ["admin","editor","reader"] }
+	]}
+]
+,
+	{"label":"Graph", "link":"?page=graphPage&module=graphEditor", "role": ["admin","editor","reader"]},
+	{"label":"SOP Similarity", "link":"?page=similarityTab&module=similaritytab", "role": ["admin","editor","reader"]},
+	{"label":"Clusters", "link":"?page=clusterPage&module=clusterEditor", "role": ["admin","editor","reader"]}

@@ -1,0 +1,93 @@
+[
+	{
+		"trigger": "ok",
+		"title" : "Excellent!",
+		"text" : "You should check your email to get started.",
+		"type" : "alert-success"
+	},
+	{
+		"trigger": "exist",
+		"title" : "Warning!",
+		"text" : "An user with that email already exist. Maybe you want to login?",
+		"type" : "alert-warning"
+	},
+	{
+		"trigger": "bad",
+		"title" : "Error!",
+		"text" : "Something went wrong. You should try again.",
+		"type" : "alert-danger"
+	},
+	{
+		"trigger": "incorrect",
+		"title" : "Error!",
+		"text" : "User or password incorrect. You should try again.",
+		"type" : "alert-danger"
+	},
+	{
+		"trigger": "confirmed",
+		"title" : "Excellent!",
+		"text" : "Mail confirmed. You can log in now.",
+		"type" : "alert-success"
+	},
+	{
+		"trigger": "not_confirmed",
+		"title" : "Warning!",
+		"text" : "You can't log in if you haven't confirmed your mail.",
+		"type" : "alert-warning"
+	},
+	{
+		"trigger": "ban",
+		"title" : "Warning!",
+		"text" : "Your account has been disabled.",
+		"type" : "alert-warning"
+	},
+	{
+		"trigger": "success",
+		"title" : "Excellent!",
+		"text" : "Data changed correctly.",
+		"type" : "alert-success"
+	},
+	{
+		"trigger": "mail_taken",
+		"title" : "Warning!",
+		"text" : "An user with that email already exist.",
+		"type" : "alert-warning"
+	},
+	{
+		"trigger": "bad_data",
+		"title" : "Warning!",
+		"text" : "Bad mail or password/name too short.",
+		"type" : "alert-warning"
+	},
+	{
+		"trigger": "pw_incorrect",
+		"title" : "Warning!",
+		"text" : "Old password inserted is not correct",
+		"type" : "alert-warning"
+	},
+	{
+		"trigger": "bad_role",
+		"title" : "Error!",
+		"text" : "Role chosen for that user doesn't exist",
+		"type" : "alert-danger"
+	},
+	{
+		"trigger": "bad_admin",
+		"title" : "Error!",
+		"text" : "You can't disable yourself or change your role",
+		"type" : "alert-danger"
+	},
+	{
+		"trigger": "empty_role",
+		"title" : "Error!",
+		"text" : "That user must have at least one role.",
+		"type" : "alert-danger"
+	},
+	{
+		"trigger": "role_created",
+		"title" : "Excellent!",
+		"text" : "Role created successfully.",
+		"type" : "alert-success"
+	}
+]
+

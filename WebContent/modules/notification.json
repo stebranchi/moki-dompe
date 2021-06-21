@@ -1,0 +1,15 @@
+[
+	{
+		"trigger": "logout",
+		"title" : "Excellent!",
+		"text" : "You have successfully logged out!",
+		"type" : "alert-success"
+	},
+	{
+		"trigger": "bad",
+		"title" : "Warning!",
+		"text" : "Something went wrong. You should try again.",
+		"type" : "alert-danger"
+	}
+]
+

@@ -1,0 +1,19 @@
+<fieldset class="col-xs-12">    	
+	<legend>Range</legend>
+	<div class="row form-group" ng-repeat="datatype in list_model track by $index">
+        <div class="col-xs-12 col-sm-10">
+            <div class="input-group input-group">
+                <span class="input-group-addon">Class: </span>
+                <select class="form-control" ng-model="list_model[$index]" ng-options="type for type in list_datatype"></select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-1">
+        	<div class="col-xs-1 col-lg-6 col-lg-offset-6 col-sm-8 col-sm-offset-8">
+        		<button class="close" aria-label="Close" ng-click="delete($index)"><span aria-hidden="true">&times;</span></button>
+        	</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="new_tab()">Add range</button>
+</fieldset>
+<div class="clearfix"></div>
+<br/>

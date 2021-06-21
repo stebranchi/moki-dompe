@@ -1,0 +1,8 @@
+[
+	{
+		"trigger": "uploadok",
+		"title" : "Excellent!",
+		"text" : "You have successfully uploaded the file!",
+		"type" : "alert-success"
+	}
+]
