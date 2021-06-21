@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 <style>
 .search{
@@ -74,26 +73,17 @@ label {
 <link rel="stylesheet" href="css/scrolling-tabs.css">
 <br><br>
 <div ng-controller="getListController as demo" class="container">
-		<label class="label-search">Free text search</label>
+		<label class="label-search">Ricerca Libera</label>
 		<div class="row">
 		<div class="box">
 		<div class="w3l_search search">
 				<form class="form" name="Search" ng-submit="searchByName()" novalidate style="width:80%; margin-right:20px">				
 					<input class = "input" type="search" name="searchname" placeholder="Free Text Search" ng-model="searchname">
 					<input class = "input" type="search" name="searchid" placeholder="Search Doc ID" ng-model="searchid">
+					<!-- <input autoComplete="on" list="attività" class = "input" type="search" name="searchactivity" placeholder="Search For Activity" ng-model="searchactivity"> -->
 					<button type="submit" class="btn btn-default search" aria-label="Left Align">
 						<i class="fa fa-search" aria-hidden="true"> </i>
 					</button>
-					<br/>
-					<label>Show only:</label>
-					<input type="radio" name="type" value="Paper" ng-model="type" required>
-			    	<label for="typeChoice1">Paper</label>
-			    	<input type="radio" name="type" value="Preclinical_Trial" ng-model="type" required>
-			    	<label for="typeChoice2">Preclinical Trial</label>
-			    	<input type="radio" name="type" value="Clinical_Trial" ng-model="type" required>
-			    	<label for="typeChoice3">Clinical Trial</label>
-					<!-- <input autoComplete="on" list="attività" class = "input" type="search" name="searchactivity" placeholder="Search For Activity" ng-model="searchactivity"> -->
-					
 					<div class="clearfix"></div>
 				</form>
 		</div>
@@ -101,65 +91,19 @@ label {
 		</div>
 		<br/>
 		<br/>
-		<label class="label-search">Advanced Search</label>
+		<label class="label-search">Ricerca campo per campo</label>
 		<div class="row" >
 		<div class="box">
-		<div class="w3l_search search" ng-model="collapsed" ng-click="collapsed=!collapsed">
-			<form class="form" ng-show="collapsed" name="Search" ng-submit="searchBySection()" novalidate style="width:80%; margin-right:20px">
-				<input type="radio" name="type" value="Paper" ng-model="type" required>
-		    	<label for="typeChoice1">Paper</label>
-		    	<input type="radio" name="type" value="Preclinical_Trial" ng-model="type" required>
-		    	<label for="typeChoice2">Trial Preclinico</label>
-		    	<input type="radio" name="type" value="Clinical_Trial" ng-model="type" required>
-		    	<label for="typeChoice3">Trial Clinico</label>
-		    	<c:set var="type" value="${param.type}" />
-		    	<br/>
-		    	<input type="text" name="title" ng-model="filename" placeholder="Enter the title of the document" required/>
-		    	<br/>
-			    <input type="text" name="author" ng-model="author" placeholder="Enter authors of the document"/>
-			    <br/>
-			    <label for="date">Date:</label>
-				<input type="date" id="date" name="date">
-				<br/>
-				<c:when test="${type == Paper}">
-				<input type="text" name="pages" ng-model="pages" placeholder="Enter number of pages of the article"/>
-				<br/>
-				<input type="text" name="isbn" ng-model="isbn" placeholder="Enter ISBN/ISSN of the article"/>
-				<br/>
-				<input type="text" name="doi" ng-model="doi" placeholder="Enter DOI of the article"/>
-				<br/>
-				<input type="text" name="requester" ng-model="requester" placeholder="Enter Requester of the article"/>
-				<br/>
-				<input type="text" name="pmcid" ng-model="pmcid" placeholder="Enter PMCID of the article"/>
-				<br/>
-				</c:when>
-				<c:otherwise>
-				<input type="text" name="cro" ng-model="cro" placeholder="Enter Institution/CRO name"/>
-				<br/>
-				<input type="text" name="keywords" ng-model="keywords" placeholder="Enter keywords"/>
-				<br/>
-				<input type="text" name="material" ng-model="material" placeholder="Enter material"/>
-				<br/>
-				<input type="text" name="documentno" ng-model="documentno" placeholder="Enter document's number"/>
-				<br/>
-				<input type="text" name="project" ng-model="project" placeholder="Enter Project/Product"/>
-				<br/>
-				<input type="text" name="glp" ng-model="glp" placeholder="Enter GLP/GCP code"/>
-				<br/>
-				<input type="text" name="essay" ng-model="essay" placeholder="Enter an essay of the document"/>
-				<br/>
-				<input type="text" name="administration" ng-model="administration" placeholder="Enter Administration type"/>
-				<br/>
-				<input type="text" name="location" ng-model="location" placeholder="Enter alphanumeric code for locating the document"/>
-				<br/>
-				</c:otherwise>
-				<input type="text" name="notes" ng-model="notes" placeholder="Enter Notes"/>
-				<br/>
-				<input type="text" name="author_address" ng-model="author_address" placeholder="Enter optional institutions references"/>
-				<br/>
-				<input type="text" name="pmcid" ng-model="pmcid" placeholder="Enter PMCID of the article"/>
-				<br/>
-				<input type="text" name="language" ng-model="language" placeholder="Enter the language of the document's content"/>
+		<div class="w3l_search search">
+			<form class="form" name="Search" ng-submit="searchBySection()" novalidate style="width:80%; margin-right:20px">
+				<input class="input" type="search" name="sectext" placeholder="Text To Search" ng-model="sectiontext">
+				<select multiple style="width: 45%" class="select" ng-model="sections">
+				  <option value="any">TUTTI I CAMPI</option>
+				  <option value="title">TITOLO</option>
+				  <option value="abstract">ABSTRACT</option>
+				  <option value="fulltext">TESTO</option>
+				  <option value="authors">AUTORI</option>
+				</select>
 				<button type="submit" class="btn btn-default search" aria-label="Left Align">
 					<i class="fa fa-search" aria-hidden="true"> </i>
 				</button>
