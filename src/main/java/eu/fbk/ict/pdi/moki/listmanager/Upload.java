@@ -127,7 +127,7 @@ public class Upload implements Service {
 	      String title = (String)input.getField(LuceneConstants.title).getValue();
 	      if (pdf != null) {
 	    	  System.out.println("Parsing PDF");
-	    	  input = parsePdf(pdf, list_req.getFilename(), input);
+	    	  input = parsePdf(pdf, list_req.getTitle(), input);
 	      }
 	      this.client.add(input);
 	      this.client.commit();

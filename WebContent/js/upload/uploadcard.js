@@ -26,23 +26,71 @@ app.controller("GetUploadController",
 		});
 	
 	$scope.uploadFile = function(){
-		req = {
-				method: 'POST',
-				url: 'RequestManager',
-				headers: {
-				  'Content-Type': "multipart/form-data"
-				},
-				data: {
-				"serviceName": "Upload",
-				"locationService": "listmanager",
-				"data" : {
-					"mode": "uploadFile",
-					"filename": $scope.filename,
-					"type": $scope.type,
-					"xml": $scope.xml,
-					"pdf": $scope.pdf
+		if ($scope.type === "Paper"){
+			req = {
+					method: 'POST',
+					url: 'RequestManager',
+					headers: {
+					  'Content-Type': "multipart/form-data"
+					},
+					data: {
+					"serviceName": "Upload",
+					"locationService": "listmanager",
+					"data" : {
+						"mode": "uploadFile",
+						"title": $scope.title,
+						"type": $scope.type,
+						"author": $scope.author,
+						"date": $scope.date,
+						"pages": $scope.pages,
+						"isbn": $scope.isbn,
+						"doi": $scope.doi,
+						"requester": $scope.requester,
+						"pmcid": $scope.pmcid,
+						"notes": $scope.notes,
+						"author_address": $scope.author_address,
+						"keywords": $scope.keywords,
+						"language": $scope.language,
+						"pdf": $scope.pdf
+					}
 				}
 			}
+		}
+		else{
+			req = {
+					method: 'POST',
+					url: 'RequestManager',
+					headers: {
+					  'Content-Type': "multipart/form-data"
+					},
+					data: {
+					"serviceName": "Upload",
+					"locationService": "listmanager",
+					"data" : {
+						"mode": "uploadFile",
+						"title": $scope.title,
+						"type": $scope.type,
+						"author": $scope.author,
+						"date": $scope.date,
+						"cro": $scope.cro,
+						"material": $scope.material,
+						"documentno": $scope.documentno,
+						"project": $scope.project,
+						"glp": $scope.glp,
+						"essay": $scope.essay,
+						"administration": $scope.administration,
+						"location": $scope.location,
+						"notes": $scope.notes,
+						"author_address": $scope.author_address,
+						"keywords": $scope.keywords,
+						"language": $scope.language,
+						"pdf": $scope.pdf
+					}
+				}
+			}
+		}
+		
+		
 		
 		};
 		$http(req)

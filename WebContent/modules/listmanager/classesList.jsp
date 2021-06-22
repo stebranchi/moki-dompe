@@ -121,38 +121,38 @@ label {
 			    <label for="date">Date:</label>
 				<input type="date" id="date" name="date">
 				<br/>
-				<c:when test="${type == Paper}">
-				<input type="text" name="pages" ng-model="pages" placeholder="Enter number of pages of the article"/>
-				<br/>
-				<input type="text" name="isbn" ng-model="isbn" placeholder="Enter ISBN/ISSN of the article"/>
-				<br/>
-				<input type="text" name="doi" ng-model="doi" placeholder="Enter DOI of the article"/>
-				<br/>
-				<input type="text" name="requester" ng-model="requester" placeholder="Enter Requester of the article"/>
-				<br/>
-				<input type="text" name="pmcid" ng-model="pmcid" placeholder="Enter PMCID of the article"/>
-				<br/>
-				</c:when>
-				<c:otherwise>
-				<input type="text" name="cro" ng-model="cro" placeholder="Enter Institution/CRO name"/>
-				<br/>
-				<input type="text" name="keywords" ng-model="keywords" placeholder="Enter keywords"/>
-				<br/>
-				<input type="text" name="material" ng-model="material" placeholder="Enter material"/>
-				<br/>
-				<input type="text" name="documentno" ng-model="documentno" placeholder="Enter document's number"/>
-				<br/>
-				<input type="text" name="project" ng-model="project" placeholder="Enter Project/Product"/>
-				<br/>
-				<input type="text" name="glp" ng-model="glp" placeholder="Enter GLP/GCP code"/>
-				<br/>
-				<input type="text" name="essay" ng-model="essay" placeholder="Enter an essay of the document"/>
-				<br/>
-				<input type="text" name="administration" ng-model="administration" placeholder="Enter Administration type"/>
-				<br/>
-				<input type="text" name="location" ng-model="location" placeholder="Enter alphanumeric code for locating the document"/>
-				<br/>
-				</c:otherwise>
+				<div ng-if="type === 'Paper'">
+					<input type="text" name="pages" ng-model="pages" placeholder="Enter number of pages of the article"/>
+					<br/>
+					<input type="text" name="isbn" ng-model="isbn" placeholder="Enter ISBN/ISSN of the article"/>
+					<br/>
+					<input type="text" name="doi" ng-model="doi" placeholder="Enter DOI of the article"/>
+					<br/>
+					<input type="text" name="requester" ng-model="requester" placeholder="Enter Requester of the article"/>
+					<br/>
+					<input type="text" name="pmcid" ng-model="pmcid" placeholder="Enter PMCID of the article"/>
+					<br/>
+				</div>
+				<div ng-if="type !== 'Paper'">
+					<input type="text" name="cro" ng-model="cro" placeholder="Enter Institution/CRO name"/>
+					<br/>
+					<input type="text" name="keywords" ng-model="keywords" placeholder="Enter keywords"/>
+					<br/>
+					<input type="text" name="material" ng-model="material" placeholder="Enter material"/>
+					<br/>
+					<input type="text" name="documentno" ng-model="documentno" placeholder="Enter document's number"/>
+					<br/>
+					<input type="text" name="project" ng-model="project" placeholder="Enter Project/Product"/>
+					<br/>
+					<input type="text" name="glp" ng-model="glp" placeholder="Enter GLP/GCP code"/>
+					<br/>
+					<input type="text" name="essay" ng-model="essay" placeholder="Enter an essay of the document"/>
+					<br/>
+					<input type="text" name="administration" ng-model="administration" placeholder="Enter Administration type"/>
+					<br/>
+					<input type="text" name="location" ng-model="location" placeholder="Enter alphanumeric code for locating the document"/>
+					<br/>
+				</div>
 				<input type="text" name="notes" ng-model="notes" placeholder="Enter Notes"/>
 				<br/>
 				<input type="text" name="author_address" ng-model="author_address" placeholder="Enter optional institutions references"/>
