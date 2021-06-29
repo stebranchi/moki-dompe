@@ -7,46 +7,37 @@ public class SOPDocument {
 
 	private String id;
 	private String title;
-	private String code;
-	private String authors;
+	private String isbn;
+	private String author;
 	private String fullText;
 	private String urls;
 	private String type;
 	private String abstrac;
-	private String csper;
-	private String materiale;
-	private String descmater;
-	private String conten;
-	private String dataarch;
-	private String numlot;
-	private String prod;
-	private String uso;
-	private String colcont;
-	private String utins;
-	private String utmod;
-	private String dtins;
-	private String testataId;
-	private String descmater2;
-	private String numstud;
-	private String datastud;
-	private String prog_prod;
-	private String societa;
-	private String glp_gcp;
-	private String classarch;
-	private String formul;
+	private String date;
+	private String material;
+	private String pages;
+	private String doi;
+	private String requester;
+	private String pmcid;
+	private String notes;
+	private String author_address;
+	private String keywords;
+	private String language;
+	private String cro;
+	private String documentno;
+	private String project;
+	private String glp;
 	private String saggio;
-	private String sommin;
-	private String tipostud;
-	private String elkeyric;
-	private String Datacheck;
-	private String DETTAGLIO;
-	private String TESTATA;
-	private String dtmod;
+	private String administration;
+	private String location;
+	private String date_upload;
   
+
 
 	public String getId() {
 		return id;
 	}
+
 
 
 	public void setId(String id) {
@@ -54,10 +45,11 @@ public class SOPDocument {
 	}
 
 
-	
-    public String getTitle() {
+
+	public String getTitle() {
 		return title;
 	}
+
 
 
 	public void setTitle(String title) {
@@ -65,24 +57,29 @@ public class SOPDocument {
 	}
 
 
-	public String getCode() {
-		return code;
+
+	public String getIsbn() {
+		return isbn;
 	}
 
 
-	public void setCode(String code) {
-		this.code = code;
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 
-	public String getAuthors() {
-		return authors;
+
+	public String getAuthor() {
+		return author;
 	}
 
 
-	public void setAuthors(String authors) {
-		this.authors = authors;
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
+
 
 
 	public String getFullText() {
@@ -90,9 +87,11 @@ public class SOPDocument {
 	}
 
 
+
 	public void setFullText(String fullText) {
 		this.fullText = fullText;
 	}
+
 
 
 	public String getUrls() {
@@ -100,9 +99,11 @@ public class SOPDocument {
 	}
 
 
+
 	public void setUrls(String urls) {
 		this.urls = urls;
 	}
+
 
 
 	public String getType() {
@@ -110,9 +111,11 @@ public class SOPDocument {
 	}
 
 
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 
 
 	public String getAbstrac() {
@@ -120,219 +123,179 @@ public class SOPDocument {
 	}
 
 
+
 	public void setAbstrac(String abstrac) {
 		this.abstrac = abstrac;
 	}
 
 
-	public String getCsper() {
-		return csper;
+
+	public String getDate() {
+		return date;
 	}
 
 
-	public void setCsper(String csper) {
-		this.csper = csper;
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 
-	public String getMateriale() {
-		return materiale;
+
+	public String getMaterial() {
+		return material;
 	}
 
 
-	public void setMateriale(String materiale) {
-		this.materiale = materiale;
+
+	public void setMaterial(String material) {
+		this.material = material;
 	}
 
 
-	public String getDescmater() {
-		return descmater;
+
+	public String getPages() {
+		return pages;
 	}
 
 
-	public void setDescmater(String descmater) {
-		this.descmater = descmater;
+
+	public void setPages(String pages) {
+		this.pages = pages;
 	}
 
 
-	public String getConten() {
-		return conten;
+
+	public String getDoi() {
+		return doi;
 	}
 
 
-	public void setConten(String conten) {
-		this.conten = conten;
+
+	public void setDoi(String doi) {
+		this.doi = doi;
 	}
 
 
-	public String getDataarch() {
-		return dataarch;
+
+	public String getRequester() {
+		return requester;
 	}
 
 
-	public void setDataarch(String dataarch) {
-		this.dataarch = dataarch;
+
+	public void setRequester(String requester) {
+		this.requester = requester;
 	}
 
 
-	public String getNumlot() {
-		return numlot;
+
+	public String getPmcid() {
+		return pmcid;
 	}
 
 
-	public void setNumlot(String numlot) {
-		this.numlot = numlot;
+
+	public void setPmcid(String pmcid) {
+		this.pmcid = pmcid;
 	}
 
 
-	public String getProd() {
-		return prod;
+
+	public String getNotes() {
+		return notes;
 	}
 
 
-	public void setProd(String prod) {
-		this.prod = prod;
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 
-	public String getUso() {
-		return uso;
+
+	public String getAuthor_address() {
+		return author_address;
 	}
 
 
-	public void setUso(String uso) {
-		this.uso = uso;
+
+	public void setAuthor_address(String author_address) {
+		this.author_address = author_address;
 	}
 
 
-	public String getColcont() {
-		return colcont;
+
+	public String getKeywords() {
+		return keywords;
 	}
 
 
-	public void setColcont(String colcont) {
-		this.colcont = colcont;
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 
 
-	public String getUtins() {
-		return utins;
+
+	public String getLanguage() {
+		return language;
 	}
 
 
-	public void setUtins(String utins) {
-		this.utins = utins;
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 
-	public String getUtmod() {
-		return utmod;
+
+	public String getCro() {
+		return cro;
 	}
 
 
-	public void setUtmod(String utmod) {
-		this.utmod = utmod;
+
+	public void setCro(String cro) {
+		this.cro = cro;
 	}
 
 
-	public String getDtins() {
-		return dtins;
+
+	public String getDocumentno() {
+		return documentno;
 	}
 
 
-	public void setDtins(String dtins) {
-		this.dtins = dtins;
+
+	public void setDocumentno(String documentno) {
+		this.documentno = documentno;
 	}
 
 
-	public String getTestataId() {
-		return testataId;
+
+	public String getProject() {
+		return project;
 	}
 
 
-	public void setTestataId(String testataId) {
-		this.testataId = testataId;
+
+	public void setProject(String project) {
+		this.project = project;
 	}
 
 
-	public String getDescmater2() {
-		return descmater2;
+
+	public String getGlp() {
+		return glp;
 	}
 
 
-	public void setDescmater2(String descmater2) {
-		this.descmater2 = descmater2;
+
+	public void setGlp(String glp) {
+		this.glp = glp;
 	}
 
-
-	public String getNumstud() {
-		return numstud;
-	}
-
-
-	public void setNumstud(String numstud) {
-		this.numstud = numstud;
-	}
-
-
-	public String getDatastud() {
-		return datastud;
-	}
-
-
-	public void setDatastud(String datastud) {
-		this.datastud = datastud;
-	}
-
-
-	public String getProg_prod() {
-		return prog_prod;
-	}
-
-
-	public void setProg_prod(String prog_prod) {
-		this.prog_prod = prog_prod;
-	}
-
-
-	public String getSocieta() {
-		return societa;
-	}
-
-
-	public void setSocieta(String societa) {
-		this.societa = societa;
-	}
-
-
-	public String getGlp_gcp() {
-		return glp_gcp;
-	}
-
-
-	public void setGlp_gcp(String glp_gcp) {
-		this.glp_gcp = glp_gcp;
-	}
-
-
-	public String getClassarch() {
-		return classarch;
-	}
-
-
-	public void setClassarch(String classarch) {
-		this.classarch = classarch;
-	}
-
-
-	public String getFormul() {
-		return formul;
-	}
-
-
-	public void setFormul(String formul) {
-		this.formul = formul;
-	}
 
 
 	public String getSaggio() {
@@ -340,118 +303,75 @@ public class SOPDocument {
 	}
 
 
+
 	public void setSaggio(String saggio) {
 		this.saggio = saggio;
 	}
 
 
-	public String getSommin() {
-		return sommin;
+
+	public String getAdministration() {
+		return administration;
 	}
 
 
-	public void setSommin(String sommin) {
-		this.sommin = sommin;
+
+	public void setAdministration(String administration) {
+		this.administration = administration;
 	}
 
 
-	public String getTipostud() {
-		return tipostud;
+
+	public String getLocation() {
+		return location;
 	}
 
 
-	public void setTipostud(String tipostud) {
-		this.tipostud = tipostud;
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 
-	public String getElkeyric() {
-		return elkeyric;
+
+	public String getDate_upload() {
+		return date_upload;
 	}
 
 
-	public void setElkeyric(String elkeyric) {
-		this.elkeyric = elkeyric;
+
+	public void setDate_upload(String date_upload) {
+		this.date_upload = date_upload;
 	}
 
-
-	public String getDatacheck() {
-		return Datacheck;
-	}
-
-
-	public void setDatacheck(String datacheck) {
-		Datacheck = datacheck;
-	}
-
-
-	public String getDETTAGLIO() {
-		return DETTAGLIO;
-	}
-
-
-	public void setDETTAGLIO(String dETTAGLIO) {
-		DETTAGLIO = dETTAGLIO;
-	}
-
-
-	public String getTESTATA() {
-		return TESTATA;
-	}
-
-
-	public void setTESTATA(String tESTATA) {
-		TESTATA = tESTATA;
-	}
-
-
-	public String getDtmod() {
-		return dtmod;
-	}
-
-
-	public void setDtmod(String dtmod) {
-		this.dtmod = dtmod;
-	}
 
 
 public SOPDocument toSOPDocument(SolrDocument doc) {
 	    this.title = (doc.getFieldValue(LuceneConstants.title) != null) ? doc.getFieldValue(LuceneConstants.title).toString().substring(1, (doc.getFieldValue(LuceneConstants.title).toString().length()-1)) : "";
-	    this.code = (doc.getFieldValue(LuceneConstants.code) != null) ? doc.getFieldValue(LuceneConstants.code).toString().substring(1, (doc.getFieldValue(LuceneConstants.code).toString().length()-1)) : "";
-	    this.authors = (doc.getFieldValue(LuceneConstants.authors) != null) ? doc.getFieldValue(LuceneConstants.authors).toString().substring(1, (doc.getFieldValue(LuceneConstants.authors).toString().length()-1)) : "";
+	    this.isbn = (doc.getFieldValue(LuceneConstants.isbn) != null) ? doc.getFieldValue(LuceneConstants.isbn).toString().substring(1, (doc.getFieldValue(LuceneConstants.isbn).toString().length()-1)) : "";
+	    this.author = (doc.getFieldValue(LuceneConstants.author) != null) ? doc.getFieldValue(LuceneConstants.author).toString().substring(1, (doc.getFieldValue(LuceneConstants.author).toString().length()-1)) : "";
 	    this.fullText = (doc.getFieldValue(LuceneConstants.fullText) != null) ? doc.getFieldValue(LuceneConstants.fullText).toString().substring(1, (doc.getFieldValue(LuceneConstants.fullText).toString().length()-1)) : "";
 	    this.urls = (doc.getFieldValue(LuceneConstants.urls) != null) ? doc.getFieldValue(LuceneConstants.urls).toString().substring(1, (doc.getFieldValue(LuceneConstants.urls).toString().length()-1)) : "";
 	    this.type = (doc.getFieldValue(LuceneConstants.type) != null) ? doc.getFieldValue(LuceneConstants.type).toString().substring(1, (doc.getFieldValue(LuceneConstants.type).toString().length()-1)) : "";
 	    this.abstrac = (doc.getFieldValue(LuceneConstants.abstrac) != null) ? doc.getFieldValue(LuceneConstants.abstrac).toString().substring(1, (doc.getFieldValue(LuceneConstants.abstrac).toString().length()-1)) : "";
-	    this.csper = (doc.getFieldValue(LuceneConstants.csper) != null) ? doc.getFieldValue(LuceneConstants.csper).toString().substring(1, (doc.getFieldValue(LuceneConstants.csper).toString().length()-1)) : "";
-	    this.materiale = (doc.getFieldValue(LuceneConstants.materiale) != null) ? doc.getFieldValue(LuceneConstants.materiale).toString().substring(1, (doc.getFieldValue(LuceneConstants.materiale).toString().length()-1)) : "";
-	    this.descmater = (doc.getFieldValue(LuceneConstants.descmater) != null) ? doc.getFieldValue(LuceneConstants.descmater).toString().substring(1, (doc.getFieldValue(LuceneConstants.descmater).toString().length()-1)) : "";
-	    this.conten = (doc.getFieldValue(LuceneConstants.conten) != null) ? doc.getFieldValue(LuceneConstants.conten).toString().substring(1, (doc.getFieldValue(LuceneConstants.conten).toString().length()-1)) : "";
-	    this.dataarch = (doc.getFieldValue(LuceneConstants.dataarch) != null) ? doc.getFieldValue(LuceneConstants.dataarch).toString().substring(1, (doc.getFieldValue(LuceneConstants.dataarch).toString().length()-1)) : "";
-	    this.numlot = (doc.getFieldValue(LuceneConstants.numlot) != null) ? doc.getFieldValue(LuceneConstants.numlot).toString().substring(1, (doc.getFieldValue(LuceneConstants.numlot).toString().length()-1)) : "";
-	    this.prod = (doc.getFieldValue(LuceneConstants.prod) != null) ? doc.getFieldValue(LuceneConstants.prod).toString().substring(1, (doc.getFieldValue(LuceneConstants.prod).toString().length()-1)) : "";
-	    this.uso = (doc.getFieldValue(LuceneConstants.uso) != null) ? doc.getFieldValue(LuceneConstants.uso).toString().substring(1, (doc.getFieldValue(LuceneConstants.uso).toString().length()-1)) : "";
-	    this.colcont = (doc.getFieldValue(LuceneConstants.colcont) != null) ? doc.getFieldValue(LuceneConstants.colcont).toString().substring(1, (doc.getFieldValue(LuceneConstants.colcont).toString().length()-1)) : "";
-	    this.utins = (doc.getFieldValue(LuceneConstants.utins) != null) ? doc.getFieldValue(LuceneConstants.utins).toString().substring(1, (doc.getFieldValue(LuceneConstants.utins).toString().length()-1)) : "";
-	    this.utmod = (doc.getFieldValue(LuceneConstants.utmod) != null) ? doc.getFieldValue(LuceneConstants.utmod).toString().substring(1, (doc.getFieldValue(LuceneConstants.utmod).toString().length()-1)) : "";
-	    this.dtins = (doc.getFieldValue(LuceneConstants.dtins) != null) ? doc.getFieldValue(LuceneConstants.dtins).toString().substring(1, (doc.getFieldValue(LuceneConstants.dtins).toString().length()-1)) : "";
-	    this.testataId = (doc.getFieldValue(LuceneConstants.testataId) != null) ? doc.getFieldValue(LuceneConstants.testataId).toString().substring(1, (doc.getFieldValue(LuceneConstants.testataId).toString().length()-1)) : "";
-	    this.descmater2 = (doc.getFieldValue(LuceneConstants.descmater2) != null) ? doc.getFieldValue(LuceneConstants.descmater2).toString().substring(1, (doc.getFieldValue(LuceneConstants.descmater2).toString().length()-1)) : "";
-	    this.numstud = (doc.getFieldValue(LuceneConstants.numstud) != null) ? doc.getFieldValue(LuceneConstants.numstud).toString().substring(1, (doc.getFieldValue(LuceneConstants.numstud).toString().length()-1)) : "";
-	    this.datastud = (doc.getFieldValue(LuceneConstants.datastud) != null) ? doc.getFieldValue(LuceneConstants.datastud).toString().substring(1, (doc.getFieldValue(LuceneConstants.datastud).toString().length()-1)) : "";
-	    this.prog_prod = (doc.getFieldValue(LuceneConstants.prog_prod) != null) ? doc.getFieldValue(LuceneConstants.prog_prod).toString().substring(1, (doc.getFieldValue(LuceneConstants.prog_prod).toString().length()-1)) : "";
-	    this.societa = (doc.getFieldValue(LuceneConstants.societa) != null) ? doc.getFieldValue(LuceneConstants.societa).toString().substring(1, (doc.getFieldValue(LuceneConstants.societa).toString().length()-1)) : "";
-	    this.glp_gcp = (doc.getFieldValue(LuceneConstants.glp_gcp) != null) ? doc.getFieldValue(LuceneConstants.glp_gcp).toString().substring(1, (doc.getFieldValue(LuceneConstants.glp_gcp).toString().length()-1)) : "";
-	    this.classarch = (doc.getFieldValue(LuceneConstants.classarch) != null) ? doc.getFieldValue(LuceneConstants.classarch).toString().substring(1, (doc.getFieldValue(LuceneConstants.classarch).toString().length()-1)) : "";
-	    this.formul = (doc.getFieldValue(LuceneConstants.formul) != null) ? doc.getFieldValue(LuceneConstants.formul).toString().substring(1, (doc.getFieldValue(LuceneConstants.formul).toString().length()-1)) : "";
+	    this.date = (doc.getFieldValue(LuceneConstants.date) != null) ? doc.getFieldValue(LuceneConstants.date).toString().substring(1, (doc.getFieldValue(LuceneConstants.date).toString().length()-1)) : "";
+	    this.material = (doc.getFieldValue(LuceneConstants.material) != null) ? doc.getFieldValue(LuceneConstants.material).toString().substring(1, (doc.getFieldValue(LuceneConstants.material).toString().length()-1)) : "";
+	    this.pages = (doc.getFieldValue(LuceneConstants.pages) != null) ? doc.getFieldValue(LuceneConstants.pages).toString().substring(1, (doc.getFieldValue(LuceneConstants.pages).toString().length()-1)) : "";
+	    this.doi = (doc.getFieldValue(LuceneConstants.doi) != null) ? doc.getFieldValue(LuceneConstants.doi).toString().substring(1, (doc.getFieldValue(LuceneConstants.doi).toString().length()-1)) : "";
+	    this.requester = (doc.getFieldValue(LuceneConstants.requester) != null) ? doc.getFieldValue(LuceneConstants.requester).toString().substring(1, (doc.getFieldValue(LuceneConstants.requester).toString().length()-1)) : "";
+	    this.pmcid = (doc.getFieldValue(LuceneConstants.pmcid) != null) ? doc.getFieldValue(LuceneConstants.pmcid).toString().substring(1, (doc.getFieldValue(LuceneConstants.pmcid).toString().length()-1)) : "";
+	    this.notes = (doc.getFieldValue(LuceneConstants.notes) != null) ? doc.getFieldValue(LuceneConstants.notes).toString().substring(1, (doc.getFieldValue(LuceneConstants.notes).toString().length()-1)) : "";
+	    this.author_address = (doc.getFieldValue(LuceneConstants.author_address) != null) ? doc.getFieldValue(LuceneConstants.author_address).toString().substring(1, (doc.getFieldValue(LuceneConstants.author_address).toString().length()-1)) : "";
+	    this.keywords = (doc.getFieldValue(LuceneConstants.keywords) != null) ? doc.getFieldValue(LuceneConstants.keywords).toString().substring(1, (doc.getFieldValue(LuceneConstants.keywords).toString().length()-1)) : "";
+	    this.language = (doc.getFieldValue(LuceneConstants.language) != null) ? doc.getFieldValue(LuceneConstants.language).toString().substring(1, (doc.getFieldValue(LuceneConstants.language).toString().length()-1)) : "";
+	    this.cro = (doc.getFieldValue(LuceneConstants.cro) != null) ? doc.getFieldValue(LuceneConstants.cro).toString().substring(1, (doc.getFieldValue(LuceneConstants.cro).toString().length()-1)) : "";
+	    this.documentno = (doc.getFieldValue(LuceneConstants.documentno) != null) ? doc.getFieldValue(LuceneConstants.documentno).toString().substring(1, (doc.getFieldValue(LuceneConstants.documentno).toString().length()-1)) : "";
+	    this.project = (doc.getFieldValue(LuceneConstants.project) != null) ? doc.getFieldValue(LuceneConstants.project).toString().substring(1, (doc.getFieldValue(LuceneConstants.project).toString().length()-1)) : "";
+	    this.glp = (doc.getFieldValue(LuceneConstants.glp) != null) ? doc.getFieldValue(LuceneConstants.glp).toString().substring(1, (doc.getFieldValue(LuceneConstants.glp).toString().length()-1)) : "";
 	    this.saggio = (doc.getFieldValue(LuceneConstants.saggio) != null) ? doc.getFieldValue(LuceneConstants.saggio).toString().substring(1, (doc.getFieldValue(LuceneConstants.saggio).toString().length()-1)) : "";
-	    this.sommin = (doc.getFieldValue(LuceneConstants.sommin) != null) ? doc.getFieldValue(LuceneConstants.sommin).toString().substring(1, (doc.getFieldValue(LuceneConstants.sommin).toString().length()-1)) : "";
-	    this.tipostud = (doc.getFieldValue(LuceneConstants.tipostud) != null) ? doc.getFieldValue(LuceneConstants.tipostud).toString().substring(1, (doc.getFieldValue(LuceneConstants.tipostud).toString().length()-1)) : "";
-	    this.elkeyric = (doc.getFieldValue(LuceneConstants.elkeyric) != null) ? doc.getFieldValue(LuceneConstants.elkeyric).toString().substring(1, (doc.getFieldValue(LuceneConstants.elkeyric).toString().length()-1)) : "";
-	    this.Datacheck = (doc.getFieldValue(LuceneConstants.Datacheck) != null) ? doc.getFieldValue(LuceneConstants.Datacheck).toString().substring(1, (doc.getFieldValue(LuceneConstants.Datacheck).toString().length()-1)) : "";
-	    this.DETTAGLIO = (doc.getFieldValue(LuceneConstants.DETTAGLIO) != null) ? doc.getFieldValue(LuceneConstants.DETTAGLIO).toString().substring(1, (doc.getFieldValue(LuceneConstants.DETTAGLIO).toString().length()-1)) : "";
-	    this.TESTATA = (doc.getFieldValue(LuceneConstants.TESTATA) != null) ? doc.getFieldValue(LuceneConstants.TESTATA).toString().substring(1, (doc.getFieldValue(LuceneConstants.TESTATA).toString().length()-1)) : "";
-	    this.dtmod = (doc.getFieldValue(LuceneConstants.dtmod) != null) ? doc.getFieldValue(LuceneConstants.dtmod).toString().substring(1, (doc.getFieldValue(LuceneConstants.dtmod).toString().length()-1)) : "";
+	    this.administration = (doc.getFieldValue(LuceneConstants.administration) != null) ? doc.getFieldValue(LuceneConstants.administration).toString().substring(1, (doc.getFieldValue(LuceneConstants.administration).toString().length()-1)) : "";
+	    this.location = (doc.getFieldValue(LuceneConstants.location) != null) ? doc.getFieldValue(LuceneConstants.location).toString().substring(1, (doc.getFieldValue(LuceneConstants.location).toString().length()-1)) : "";
+	    this.date_upload = (doc.getFieldValue(LuceneConstants.date_upload) != null) ? doc.getFieldValue(LuceneConstants.date_upload).toString().substring(1, (doc.getFieldValue(LuceneConstants.date_upload).toString().length()-1)) : "";
 
 	    return this;
   }

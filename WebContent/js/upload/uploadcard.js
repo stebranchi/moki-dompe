@@ -2,6 +2,8 @@ var app = angular.module("Moki")
 
 app.controller("GetUploadController",   
         function($scope, $http, $window, NgTableParams, mokiService) {
+	
+	$scope.type_upload = "Paper";
 	req = {
 			method: 'POST',
 			url: 'RequestManager',
@@ -39,10 +41,12 @@ app.controller("GetUploadController",
 					"data" : {
 						"mode": "uploadFile",
 						"title": $scope.title,
-						"type": $scope.type,
+						"xml": $scope.xml,
+						"type": $scope.type_upload,
 						"author": $scope.author,
 						"date": $scope.date,
 						"pages": $scope.pages,
+						"journal": $scope.journal,
 						"isbn": $scope.isbn,
 						"doi": $scope.doi,
 						"requester": $scope.requester,
@@ -69,7 +73,8 @@ app.controller("GetUploadController",
 					"data" : {
 						"mode": "uploadFile",
 						"title": $scope.title,
-						"type": $scope.type,
+						"xml": $scope.xml,
+						"type": $scope.type_upload,
 						"author": $scope.author,
 						"date": $scope.date,
 						"cro": $scope.cro,
@@ -77,7 +82,7 @@ app.controller("GetUploadController",
 						"documentno": $scope.documentno,
 						"project": $scope.project,
 						"glp": $scope.glp,
-						"essay": $scope.essay,
+						"saggio": $scope.saggio,
 						"administration": $scope.administration,
 						"location": $scope.location,
 						"notes": $scope.notes,
@@ -91,14 +96,12 @@ app.controller("GetUploadController",
 		}
 		
 		
-		
-		};
 		$http(req)
 		.then(function(response){
 			$window.location.href = response.data.data;
 		})
 		.catch(console.error);
-	}
+	};
 	
 
 })

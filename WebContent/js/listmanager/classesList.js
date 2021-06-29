@@ -16,7 +16,8 @@ app.controller("getListController",
 	var search;
 	var self = this;
 	var data;
-	$scope.details = 'endnote';
+	$scope.type_advanced = "All";
+	$scope.type_search = "All";
 	index_active = -1;
 	
 	req = {
@@ -89,63 +90,71 @@ app.controller("getListController",
 		});
 	}
 //	Function for searching as a free text in 1 or more specific section
-	$scope.searchBySection = function(){
+	$scope.AdvancedSearch = function(){
 		search = $scope.sectiontext;
-		if ($scope.sections != null && $scope.sections.includes("any")){
-			req = {
-				method: 'POST',
-	   			url: 'RequestManager',
-	   			headers: {
-	   			  'Content-Type': "application/json"
-	   			},
-	   			data: {
-					"serviceName": "ClassesManager",
-					"locationService": "listmanager",
-					"data" : {
-						"mode": "searchSection",
-						"name": search,
-						"sections": ["authors", "title", "fulltext", "abstract"]					
-					}
-				}
-			}
-			
-		}
-		else if ($scope.sections != null){
-			req = {
-					method: 'POST',
-	   			url: 'RequestManager',
-	   			headers: {
-	   			  'Content-Type': "application/json"
-	   			},
-	   			data: {
-					"serviceName": "ClassesManager",
-					"locationService": "listmanager",
-					"data" : {
-						"mode": "searchSection",
-						"name": search,
-						"sections": $scope.sections						
-					}
-				}
-			}
-		}
-		else
-		{
+		if ($scope.type === "Paper"){
 			req = {
 					method: 'POST',
 					url: 'RequestManager',
 					headers: {
-					  'Content-Type': "application/json"
+					  'Content-Type': "multipart/form-data"
 					},
 					data: {
 					"serviceName": "ClassesManager",
 					"locationService": "listmanager",
 					"data" : {
-						"mode": "search",
-						"name": search,
+						"mode": "advancedSearch",
+						"title": $scope.title,
+						"type": $scope.type_advanced,
+						"author": $scope.author,
+						"date": $scope.date,
+						"pages": $scope.pages,
+						"journal": $scope.journal,
+						"isbn": $scope.isbn,
+						"doi": $scope.doi,
+						"requester": $scope.requester,
+						"pmcid": $scope.pmcid,
+						"notes": $scope.notes,
+						"author_address": $scope.author_address,
+						"keywords": $scope.keywords,
+						"language": $scope.language
 					}
 				}
 			}
 		}
+		else{
+			req = {
+					method: 'POST',
+					url: 'RequestManager',
+					headers: {
+					  'Content-Type': "multipart/form-data"
+					},
+					data: {
+					"serviceName": "ClassesManager",
+					"locationService": "listmanager",
+					"data" : {
+						"mode": "advancedSearch",
+						"title": $scope.title,
+						"type": $scope.type_advanced,
+						"author": $scope.author,
+						"date": $scope.date,
+						"cro": $scope.cro,
+						"material": $scope.material,
+						"documentno": $scope.documentno,
+						"project": $scope.project,
+						"glp": $scope.glp,
+						"saggio": $scope.saggio,
+						"administration": $scope.administration,
+						"location": $scope.location,
+						"notes": $scope.notes,
+						"author_address": $scope.author_address,
+						"keywords": $scope.keywords,
+						"language": $scope.language
+					}
+				}
+			}
+		}
+		
 	$http(req)
 		.then(function(response){
 			getdata = response.data.data;
@@ -175,11 +184,12 @@ app.controller("getListController",
 					  'Content-Type': "application/json"
 					},
 					data: {
-					"serviceName": "ClassesManager",
-					"locationService": "listmanager",
-					"data" : {
-						"mode": "search",
+						"serviceName": "ClassesManager",
+						"locationService": "listmanager",
+						"data" : {
+						"mode": "searchName",
 						"name": $scope.searchname,
+						"type": $scope.type_search,
 					}
 				}
 			}
@@ -189,80 +199,13 @@ app.controller("getListController",
 				startTime = new Date();
 				getdata = response.data.data;
 	        	data = getdata.list;
-	        	//console.log(response.data.time);
+	        	console.log(response.data);
 	        	//create the table
 	        	
 	        	self.tableParams = new NgTableParams({ count: 10}, { counts: [5, 10, 25], dataset: data});
 			})
 			.catch(console.error);
-		}
-		else if(typeof $scope.searchrole !== "undefined" && $scope.searchrole.length > 0) {
-			search = $scope.searchrole;
-			reqName = {
-					method: 'POST',
-					url: 'RequestManager',
-					headers: {
-					  'Content-Type': "application/json"
-					},
-					data: {
-					"serviceName": "ClassesManager",
-					"locationService": "listmanager",
-					"data" : {
-						"mode": "searchRole",
-						"name": $scope.searchrole,
-					}
-				}
-			}
-		
-			$http(reqName)
-			.then(function(response){
-				getdata = response.data.data;
-	        	data = getdata.list;
-	        	
-	        	//create the table
-	        	self.tableParams = new NgTableParams({ count: 10}, { counts: [5, 10, 25], dataset: data});
-	        	
-	        	//populates the list of classes
-	        	data.forEach(function(item, index){
-	        		$scope.classes_list.push(item);
-	         	});
-			})
-			.catch(console.error);
-		}
-		else if(typeof $scope.searchid !== "undefined" && $scope.searchid.length > 0) {
-			search = $scope.searchid;
-			reqName = {
-					method: 'POST',
-					url: 'RequestManager',
-					headers: {
-					  'Content-Type': "application/json"
-					},
-					data: {
-					"serviceName": "ClassesManager",
-					"locationService": "listmanager",
-					"data" : {
-						"mode": "searchById",
-						"id": $scope.searchid,
-					}
-				}
-			}
-		
-			$http(reqName)
-			.then(function(response){
-				getdata = response.data.data;
-	        	data = getdata.list;
-	        	
-	        	//create the table
-	        	self.tableParams = new NgTableParams({ count: 10}, { counts: [5, 10, 25], dataset: data});
-	        	
-	        	//populates the list of classes
-	        	data.forEach(function(item, index){
-	        		$scope.classes_list.push(item);
-	         	});
-			})
-			.catch(console.error);
-		}
-		else {
+		}else {
 			getAll();
 		}
 	}

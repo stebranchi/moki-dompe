@@ -8,11 +8,11 @@
 		<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
 			<form class="form" name="upload" ng-submit="uploadFile()">
 			<label>Document Type:</label>
-			<input type="radio" name="type" value="Paper" ng-model="type" checked>
+			<input type="radio" name="type_upload" value="Paper" ng-model="type_upload" checked>
 	    	<label for="typeChoice1">Paper</label>
-	    	<input type="radio" name="type" value="Preclinical_Trial" ng-model="type">
+	    	<input type="radio" name="type_upload" value="Preclinical_Trial" ng-model="type_upload">
 	    	<label for="typeChoice2">Trial Preclinico</label>
-	    	<input type="radio" name="type" value="Clinical_Trial" ng-model="type">
+	    	<input type="radio" name="type_upload" value="Clinical_Trial" ng-model="type_upload">
 	    	<label for="typeChoice3">Trial Clinico</label>
 	    	<br/>
 	    	<label>XML File:</label>
@@ -28,9 +28,12 @@
 		    <label for="date">Date:</label>
 			<input type="date" id="date" name="date">
 			<br/>
-			<div ng-if="type === 'Paper'">
+			<div ng-if="type_upload === 'Paper'">
 				<label>Pages:</label>
 				<input type="text" name="pages" ng-model="pages" placeholder="Enter number of pages of the article"/>
+				<br/>
+				<label>Journal:</label>
+				<input type="text" name="journal" ng-model="journal" placeholder="Enter the journal of the article"/>
 				<br/>
 				<label>ISBN:</label>
 				<input type="text" name="isbn" ng-model="isbn" placeholder="Enter ISBN/ISSN of the article"/>
@@ -45,7 +48,7 @@
 				<input type="text" name="pmcid" ng-model="pmcid" placeholder="Enter PMCID of the article"/>
 				<br/>
 			</div>
-			<div ng-if="type !== 'Paper'">
+			<div ng-if="type_upload !== 'Paper'">
 				<label>CRO:</label>
 				<input type="text" name="cro" ng-model="cro" placeholder="Enter Institution/CRO name"/>
 				<br/>
@@ -61,8 +64,8 @@
 				<label>GLP/GCP:</label>
 				<input type="text" name="glp" ng-model="glp" placeholder="Enter GLP/GCP code"/>
 				<br/>
-				<label>Essay:</label>
-				<input type="text" name="essay" ng-model="essay" placeholder="Enter an essay of the document"/>
+				<label>Saggio:</label>
+				<input type="text" name="essay" ng-model="saggio" placeholder="Enter a saggio of the document"/>
 				<br/>
 				<label>Administration Type:</label>
 				<input type="text" name="administration" ng-model="administration" placeholder="Enter Administration type"/>
@@ -85,6 +88,7 @@
 			<br/>
 		    <label>Attachment:</label>
 		    <input type="file" name="file_pdf" fileread="pdf"/>
+		    <input type="submit" value="Upload">
 		    </form>
 		</div>
 	</div>

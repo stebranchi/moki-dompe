@@ -87,21 +87,106 @@ public class Upload implements Service {
 	  }
 	  
 	  public ReturnMessage uploadFile() throws ParserConfigurationException, SAXException, IOException, SolrServerException {
-		  String xml_tmp = list_req.getXml();
-		  String[] xml_sub = xml_tmp.split("base64,");
-		  String xml = xml_sub[1];
+		  SolrInputDocument input = new SolrInputDocument();
+		  String title = "";
+		  if (list_req.getXml() != null) {
+			  String xml_tmp = list_req.getXml();
+			  String[] xml_sub = xml_tmp.split("base64,");
+			  String xml = xml_sub[1];
+			  Decoder decoder = Base64.getDecoder();
+			  byte[] bytes = decoder.decode(xml);
+			  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		      factory.setNamespaceAware(true);
+		      DocumentBuilder builder = factory.newDocumentBuilder();
+		      Document doc = builder.parse(new ByteArrayInputStream(bytes));
+		      input = parseXml(doc, list_req.getType());
+		      title = (String)input.getField(LuceneConstants.title).getValue();
+		  } else {
+			  if (list_req.getTitle() != null) {
+				  	title = list_req.getTitle();
+					input.addField(LuceneConstants.title, title);
+				}
+				if (list_req.getType() != null) {
+					input.addField(LuceneConstants.type, list_req.getType());
+				}
+				if (list_req.getAuthor() != null) {
+					input.addField(LuceneConstants.author, list_req.getAuthor());
+				}
+				if (list_req.getDate() != null) {
+					input.addField(LuceneConstants.date, list_req.getDate());
+				}
+				if (list_req.getJournal() != null) {
+					input.addField(LuceneConstants.journal, list_req.getJournal());
+				}
+				if (list_req.getPages() != null) {
+					input.addField(LuceneConstants.pages, list_req.getPages());
+				}
+				if (list_req.getIsbn() != null) {
+					input.addField(LuceneConstants.isbn, list_req.getIsbn());
+				}
+				if (list_req.getDoi() != null) {
+					input.addField(LuceneConstants.doi, list_req.getDoi());
+				}
+				if (list_req.getRequester() != null) {
+					input.addField(LuceneConstants.requester, list_req.getRequester());
+				}
+				if (list_req.getPmcid() != null) {
+					input.addField(LuceneConstants.pmcid, list_req.getPmcid());
+				}
+				if (list_req.getNotes() != null) {
+					input.addField(LuceneConstants.notes, list_req.getNotes());
+				}
+				if (list_req.getAuthorAddress() != null) {
+					input.addField(LuceneConstants.author_address, list_req.getAuthorAddress());
+				}
+				if (list_req.getKeywords() != null) {
+					input.addField(LuceneConstants.keywords, list_req.getKeywords());
+				}
+				if (list_req.getLanguage() != null) {
+					input.addField(LuceneConstants.language, list_req.getLanguage());
+				}
+				if (list_req.getCro() != null) {
+					input.addField(LuceneConstants.cro, list_req.getCro());
+				}
+				if (list_req.getMaterial() != null) {
+					input.addField(LuceneConstants.material, list_req.getMaterial());
+				}
+				if (list_req.getDocumentno() != null) {
+					input.addField(LuceneConstants.documentno, list_req.getDocumentno());
+				}
+				if (list_req.getProject() != null) {
+					input.addField(LuceneConstants.project, list_req.getProject());
+				}
+				if (list_req.getGlp() != null) {
+					input.addField(LuceneConstants.glp, list_req.getGlp());
+				}
+				if (list_req.getEssay() != null) {
+					input.addField(LuceneConstants.saggio, list_req.getEssay());
+				}
+				if (list_req.getAdministration() != null) {
+					input.addField(LuceneConstants.administration, list_req.getAdministration());
+				}
+				if (list_req.getLocation() != null) {
+					input.addField(LuceneConstants.location, list_req.getLocation());
+				}
+		  }
 		  String pdf = null;
 		  if (list_req.getPdf() != null) {
 			  String pdf_tmp = list_req.getPdf();
 		  	  String[] pdf_sub = pdf_tmp.split("base64,");
 		  	  pdf = pdf_sub[1];
+		  	  input = parsePdf(pdf, list_req.getTitle(), input);
 		  }
-		  String title = parseFile(xml, pdf);
 		  
 		  java.util.Date dt = new java.util.Date();
 		  java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		  String currentTime = sdf.format(dt);
+		  input.addField(LuceneConstants.date_upload, currentTime);
 		  String user_email = (String)this.session.getAttribute("email");
+		  
+		  this.client.add(input);
+	      this.client.commit();
+	      System.out.println("Committed");
 		  
 		  try {
 			   DBLayer.connect(Config.server, Config.dbName, Config.user, Config.pass);
@@ -114,26 +199,6 @@ public class Upload implements Service {
 		  res.setMessage_text("ok");
 		  res.setData("index.jsp?page=uploadcard&module=upload&notification=uploadok");
 		  return res;
-	  }
-	
-	  private String parseFile(String xml, String pdf) throws ParserConfigurationException, SAXException, IOException, SolrServerException {
-		  Decoder decoder = Base64.getDecoder();
-		  byte[] bytes = decoder.decode(xml);
-		  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	      factory.setNamespaceAware(true);
-	      DocumentBuilder builder = factory.newDocumentBuilder();
-	      Document doc = builder.parse(new ByteArrayInputStream(bytes));
-	      SolrInputDocument input = parseXml(doc, list_req.getType());
-	      String title = (String)input.getField(LuceneConstants.title).getValue();
-	      if (pdf != null) {
-	    	  System.out.println("Parsing PDF");
-	    	  input = parsePdf(pdf, list_req.getTitle(), input);
-	      }
-	      this.client.add(input);
-	      this.client.commit();
-	      System.out.println("Committed");
-	      
-	      return title;
 	  }
 	  
 	  private SolrInputDocument parseXml(Document doc, String type) {
@@ -168,8 +233,8 @@ public class Upload implements Service {
     			   }
     		   }
     	document.addField(LuceneConstants.title, title);
-	    document.addField(LuceneConstants.authors, autori);
-	    document.addField(LuceneConstants.code, isbn);
+	    document.addField(LuceneConstants.author, autori);
+	    document.addField(LuceneConstants.isbn, isbn);
 	    document.addField(LuceneConstants.type, type);
 	    document.addField(LuceneConstants.abstrac, abstrac);
 	    }

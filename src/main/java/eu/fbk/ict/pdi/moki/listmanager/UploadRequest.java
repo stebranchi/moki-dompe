@@ -18,6 +18,7 @@ public class UploadRequest {
 	private String author_address;
 	private String keywords;
 	private String language;
+	private String journal;
 	private String cro;
 	private String material;
 	private String documentno;
@@ -99,11 +100,11 @@ public class UploadRequest {
 		this.notes = notes;
 	}
 
-	public String getAuthor_address() {
+	public String getAuthorAddress() {
 		return author_address;
 	}
 
-	public void setAuthor_address(String author_address) {
+	public void setAuthorAddress(String author_address) {
 		this.author_address = author_address;
 	}
 
@@ -121,6 +122,14 @@ public class UploadRequest {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+	
+	public String getJournal() {
+		return journal;
+	}
+
+	public void setJournal(String journal) {
+		this.journal = journal;
 	}
 
 	public String getCro() {
