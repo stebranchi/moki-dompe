@@ -127,16 +127,26 @@ label {
 			    <br/>
 			    <br/>
 			    <label for="date">Date:</label>
-				<input type="date" id="date" name="date">
+				<input type="text" id="date" name="date" ng-model="date" placeholder="Enter date of the document">
 				<br/>
 				<br/>
-				<div ng-if="type_advanced === 'Paper'">
+				<label for="abstract">Abstract:</label>
+				<input type="text" id="abstract" name="abstract" ng-model= "abstract" placeholder="Enter Abstract of the article">
+				<br/>
+				<br/>
+				<div ng-show="type_advanced === 'Paper' || type_advanced === 'All'">
 					<label>Pages:</label>
 					<input type="text" name="pages" ng-model="pages" placeholder="Enter number of pages of the article"/>
 					<label>ISBN:</label>
 					<input type="text" name="isbn" ng-model="isbn" placeholder="Enter ISBN/ISSN of the article"/>
 					<br/>
 					<br/>
+					<label>Author Address:</label>
+					<input type="text" name="author_address" ng-model="author_address" placeholder="Enter optional institutions references"/>
+					<br/>
+					<br/>
+					<label>Journal:</label>
+					<input type="text" name="journal" ng-model="journal" placeholder="Enter journal of the article"/>
 					<label>DOI:</label>
 					<input type="text" name="doi" ng-model="doi" placeholder="Enter DOI of the article"/>
 					<br/>
@@ -148,7 +158,11 @@ label {
 					<br/>
 					<br/>
 				</div>
-				<div ng-if="type_advanced !== 'Paper'">
+				<div ng-show="type_advanced !== 'Paper'">
+					<label>Relation Number:</label>
+					<input type="text" name="numrel" ng-model="numrel" placeholder="Enter relation number of the document"/>
+					<br/>
+					<br/>
 					<label>CRO:</label>
 					<input type="text" name="cro" ng-model="cro" placeholder="Enter Institution/CRO name"/>
 					<label>Material:</label>
@@ -180,8 +194,6 @@ label {
 				</div>
 				<label>Notes:</label>
 				<input type="text" name="notes" ng-model="notes" placeholder="Enter Notes"/>
-				<label>Author Address:</label>
-				<input type="text" name="author_address" ng-model="author_address" placeholder="Enter optional institutions references"/>
 				<br/>
 				<br/>
 				<label>Keywords:</label>
@@ -192,31 +204,35 @@ label {
 		</div>  
 		</div>  
 	</div>
+	<div ng-if="results != -1">
+	 <span>
+	 The number of found documents is </span><span style="color:black"ng-bind="results"></span>
+	 </div>
 
 		  <div scrolling-tabs-wrapper watch-tabs="tabs">
             <!-- Standard Bootstrap ul.nav-tabs -->
             <ul class="nav nav-tabs" role="tablist">
             	<li ng-class="{ 'active': lista.active, 'disabled': lista.disabled }"><a role="tab" data-toggle="tab" ng-click="go(-1)">Lista</a></li>
-            	<li ng-repeat="tab in tabs" ng-class="tab.active"><a role="tab" data-toggle="tab" ng-click="go($index)"><span ng-bind="tab.id"></span>&nbsp; <button ng-click="close($index)" class="close close-sm"><span class="glyphicon glyphicon-remove-circle black"></span></button></a></li>
+            	<li ng-repeat="tab in tabs" ng-class="tab.active"><a role="tab" data-toggle="tab" ng-click="go($index)"><span ng-bind="tab.paneId"></span>&nbsp; <button ng-click="close($index)" class="close close-sm"><span class="glyphicon glyphicon-remove-circle black"></span></button></a></li>
             </ul>
           </div>
     
           <!-- Tab panes -->
           
 	 <!-- Tab of the table -->
+	 
 	 <div class="tab-content clearfix">	 
 		<div class="tab-pane" ng-class="{ 'active': lista.active }">
 			<table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
 			   <tr ng-repeat="element in $data">
-			   		<td title="'Titolo'" filter="{ title: 'text'}" style="width: 48%" sortable="'title'">
+			   		<td title="'Titolo'" filter="{ title: 'text'}" style="width: 38%" sortable="'title'">
 			        	<span ng-bind="element.title"></span></td>
-			       	<td title="'Autori'" filter="{ authors: 'text'}" style="width: 40%"  sortable="'authors'">
-			        	<span ng-bind="element.authors"></span></td>
-			        <!--<td title="'Codice'" filter="{ code: 'text'}" style="width: 10%" sortable="'code'">
-			        	<span ng-bind="element.code"></span></td>
-			        <td ng-click="new_tab(element)" title="'Owning Site'" filter="{ sopApplicabilityAreasRaw: 'text'}" sortable="'titolo'">
-			        	<span ng-bind="element.sopOwningSite"></span></td>
-			       	<td> -->
+			        <td data-sort='YYYYMMDD' title="'Date'" filter="{ date: 'text'}" style="width: 10%" sortable="'date'">
+			        	<span ng-bind="element.date"></span></td>
+			       	<td title="'Author'" filter="{ author: 'text'}" style="width: 30%"  sortable="'author'">
+			        	<span ng-bind="element.author"></span></td>
+			        <td title="'Date Upload'" filter="{ date_upload: 'text'}" style="width: 10%"  sortable="'date_upload'">
+			        	<span ng-bind="element.date_upload"></span></td>
 			       	<td title="'Documento'" filter="{ type: 'text'}" style="width: 10%" sortable="'type'">
 			        	<span ng-bind="element.type"></span></td>
 			       	<td style="width: 2%" >
@@ -233,19 +249,33 @@ label {
 		<!-- Repeat for the other panes -->
 		<div ng-repeat="tab in tabs" class="tab-pane" ng-class="tab.active">
 			<br>
-			<div ng-if="details == 'endnote'">
+			<div>
 				<div>
-				    <h3>Titolo</h3>
+				    <h3>Title</h3>
 				</div>
 				<div>
 				    <span ng-bind="tab.title"></span>
 				</div>
 				<br/>
 				<div>
-				    <h3>Codice</h3>
+				    <h3>Date</h3>
 				</div>
 				<div>
-				<span ng-bind="tab.isbn"></span>
+					<span ng-bind="tab.date"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Authors</h3>
+				</div>
+				<div ng-repeat="author in tab.author">
+					<span ng-bind="author"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Date Upload</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.date_upload"></span>
 				</div>
 				<br/>
 				<div>
@@ -255,75 +285,193 @@ label {
 					<span ng-bind="tab.abstract"></span>
 				</div>
 				<br/>
+			</div>
+			<div ng-if="tab.type == 'Paper'">
 				<div>
-				    <h3>Autori</h3>
+				    <h3>Pages</h3>
 				</div>
 				<div>
-					<span ng-bind="tab.authors"></span>
+				    <span ng-bind="tab.pages"></span>
 				</div>
 				<br/>
 				<div>
-				    <h3>Allegati</h3>
+				    <h3>Journal</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.journal"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>ISBN</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.isbn"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>DOI</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.doi"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Requester</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.requester"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>PMCID</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.pmcid"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Author Address</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.author_address"></span>
+				</div>
+				<br/>
+			</div>
+			<div ng-if="tab.type !== 'Paper'">
+				<div>
+				    <h3>Relation Number</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.numrel"></span>
+				</div>
+				<br/><div>
+				    <h3>CRO Name</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.cro"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Material</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.material"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Document Number</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.documentno"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Project/Product</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.project"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>GLP/GCP</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.glp"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Saggio</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.saggio"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Administration Type</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.administration"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Location</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.location"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Material Description</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.desc_material"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Archiving Date</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.data_arch"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Lotto Number</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.num_lotto"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Product</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.prodotto"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Container</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.container"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Formula</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.formula"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Study Type</h3>
+				</div>
+				<div>
+				    <span ng-bind="tab.tipo_studio"></span>
+				</div>
+				<br/>
+			</div>
+			<div>
+				<div>
+				    <h3>Notes</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.notes"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Keywords</h3>
+				</div>
+				<div>
+					<span ng-bind="tab.keywords"></span>
+				</div>
+				<br/>
+				<div>
+				    <h3>Attachments</h3>
 				</div>
 				<div ng-repeat="url in tab.urls">
 					<span ng-click="show_pdf(url)" style="font-weight:bold" ng-bind="url"></span>
 				</div>
 			</div>
-			<div ng-if="details == 'glp'">
-				<div>
-				    <h3>Materiale</h3>
-				</div>
-				<div>
-				    <span ng-bind="tab.materiale"></span>
-				</div>
-				<br/>
-				<div>
-				    <h3>Contenuto</h3>
-				</div>
-				<div>
-					<span ng-bind="tab.conten"></span>
-				</div>
-				<br/>
-				<div>
-				    <h3>Numlot</h3>
-				</div>
-				<div>
-					<span ng-bind="tab.numlot"></span>
-				</div>
-				<br/>
-				<div>
-				    <h3>Testata</h3>
-				</div>
-				<div>
-					<span ng-bind="tab.testata"></span>
-				</div>
-				<br/>
-				<div>
-				    <h3>Numero studio</h3>
-				</div>
-				<div>
-					<span ng-bind="tab.numstud"></span>
-				</div>
-				<br/>
-				<div>
-				    <h3>Descrizione Materiale</h3>
-				</div>
-				<div>
-					<span ng-bind="tab.desc2"></span>
-				</div>
-			</div>
-			<button type="button" class="btn btn-info" ng-click="changeValue('endnote')">Dettagli Endnote</button>
-			<button type="button" class="btn btn-info" ng-click="changeValue('glp')">Dettagli GLP</button>
-			<!-- <div>
-				<span ng-bind="tab.testoapparea"></span></td>
-			<div/>
-			<br/>
-			<div>
-				<span style="font-weight:bold" ng-bind="tab.titoloownsite"></span></td>
-			</div>
-			<div>
-				<span ng-bind="tab.testoownsite"></span></td>
-			<div/> -->
 			<br/>
 			<div class="clearfix"></div>
 			<br/>

@@ -2,6 +2,8 @@ package eu.fbk.ict.pdi.moki.listmanager;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -68,7 +70,7 @@ public class ClassesManager implements Service {
     } catch( Exception e) {
     	
     }
-    final String solrUrl = this.properties.getProperty("solrUrl") + "/solr/Prova";
+    final String solrUrl = this.properties.getProperty("solrUrl") + "/solr/" + this.properties.getProperty("solrSchema");
     this.client = new HttpSolrClient.Builder(solrUrl)
 		    .withConnectionTimeout(100000)
 		    .withSocketTimeout(600000)
@@ -128,15 +130,17 @@ public class ClassesManager implements Service {
   }  */
   
 //This function is used to free text search in the fulltext fo the SOP or in the ID
-  public ReturnMessage searchName() throws IOException, SolrServerException {
+  public ReturnMessage searchName() throws IOException, SolrServerException, SQLException {
 	SolrQuery query = new SolrQuery();
 	String name = list_req.getName();
 	String type = list_req.getType();
 	DBLayer.connect(Config.server, Config.dbName, Config.user, Config.pass);
 	DBLayer.SQL("INSERT INTO searchterms (text) VALUES", name);
+	name = name.trim();
 	name = name + '~';
-	name.replace(" ", "~ ");
-    query.set("q", "everything:" + name);
+	name = name.replace(" ", "~ AND everything:");
+	System.out.println(name);
+    query.set("q", "everything: " + name);
     query.setStart(0);
     query.setRows(LuceneConstants.MAX_SEARCH);
 	QueryResponse response = client.query(query);
@@ -149,130 +153,108 @@ public class ClassesManager implements Service {
   public ReturnMessage advancedSearch() throws IOException, SolrServerException {
 	String type = list_req.getType();
 	ArrayList<String> qlist = new ArrayList<String>();
-	if (list_req.getTitle() != null) {
+	if (list_req.getTitle() != null && list_req.getTitle() != "") {
 		String tmp = list_req.getTitle();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
-		qlist.add("title: " + tmp);
+		String[] parts = tmp.split(" ");
+		for(String x: parts) {
+			qlist.add("title: " + x + "~");
+		}
 	}
-	if (list_req.getAuthor() != null) {
-		String tmp = list_req.getAuthor();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
-		qlist.add("author: " + tmp);
-	}
-	if (list_req.getDate() != null) {
-		String tmp = list_req.getDate();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
-		qlist.add("date: " + tmp);
-	}
-	if (list_req.getPages() != null) {
-		String tmp = list_req.getPages();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
-		qlist.add("pages: " + tmp);
-	}
-	if (list_req.getJournal() != null) {
+	if (list_req.getJournal() != null && list_req.getJournal() != "") {
 		String tmp = list_req.getJournal();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("journal: " + tmp);
 	}
-	if (list_req.getIsbn() != null) {
+	if (list_req.getAuthor() != null && list_req.getAuthor() != "") {
+		String tmp = list_req.getAuthor();
+		String[] parts = tmp.split(" ");
+		for(String x: parts) {
+			qlist.add("author: " + x + "~");
+		}
+	}
+	if (list_req.getDate() != null && list_req.getDate() != "") {
+		String tmp = list_req.getDate();
+		qlist.add("date: " + tmp);
+	}
+	if (list_req.getPages() != null && list_req.getPages() != "") {
+		String tmp = list_req.getPages();
+		qlist.add("pages: " + tmp);
+	}
+	if (list_req.getIsbn() != null && list_req.getIsbn() != "") {
 		String tmp = list_req.getIsbn();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("isbn: " + tmp);
 	}
-	if (list_req.getDoi() != null) {
+	if (list_req.getNumrel() != null && list_req.getNumrel() != "") {
+		String tmp = list_req.getNumrel();
+		qlist.add("numrel: " + tmp);
+	}
+	if (list_req.getDoi() != null && list_req.getDoi() != "") {
 		String tmp = list_req.getDoi();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("doi: " + tmp);
 	}
-	if (list_req.getRequester() != null) {
+	if (list_req.getRequester() != null && list_req.getRequester() != "") {
 		String tmp = list_req.getRequester();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("requester: " + tmp);
 	}
-	if (list_req.getPmcid() != null) {
+	if (list_req.getPmcid() != null && list_req.getPmcid() != "") {
 		String tmp = list_req.getPmcid();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("pmcid: " + tmp);
 	}
-	if (list_req.getNotes() != null) {
+	if (list_req.getNotes() != null && list_req.getNotes() != "") {
 		String tmp = list_req.getNotes();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("notes: " + tmp);
 	}
-	if (list_req.getAuthorAddress() != null) {
+	if (list_req.getAuthorAddress() != null && list_req.getAuthorAddress() != "") {
 		String tmp = list_req.getAuthorAddress();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("author_address: " + tmp);
 	}
-	if (list_req.getKeywords() != null) {
+	if (list_req.getKeywords() != null && list_req.getKeywords() != "") {
 		String tmp = list_req.getKeywords();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
-		qlist.add("keywords: " + tmp);
+		String[] parts = tmp.split(" ");
+		for(String x: parts) {
+			qlist.add("keywords: " + x + "~");
+		}
 	}
-	if (list_req.getLanguage() != null) {
+	if (list_req.getLanguage() != null && list_req.getLanguage() != "") {
 		String tmp = list_req.getLanguage();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("language: " + tmp);
 	}
-	if (list_req.getCro() != null) {
+	if (list_req.getCro() != null && list_req.getCro() != "") {
 		String tmp = list_req.getCro();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("cro: " + tmp);
 	}
-	if (list_req.getMaterial() != null) {
+	if (list_req.getAbstrac() != null && list_req.getAbstrac() != "") {
+		String tmp = list_req.getAbstrac();
+		String[] parts = tmp.split(" ");
+		for(String x: parts) {
+			qlist.add("abstract: " + x + "~");
+		}
+	}
+	if (list_req.getMaterial() != null && list_req.getMaterial() != "") {
 		String tmp = list_req.getMaterial();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("material: " + tmp);
 	}
-	if (list_req.getDocumentno() != null) {
+	if (list_req.getDocumentno() != null && list_req.getDocumentno() != "") {
 		String tmp = list_req.getDocumentno();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("documentno: " + tmp);
 	}
-	if (list_req.getProject() != null) {
+	if (list_req.getProject() != null && list_req.getProject() != "") {
 		String tmp = list_req.getProject();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("project: " + tmp);
 	}
-	if (list_req.getGlp() != null) {
+	if (list_req.getGlp() != null && list_req.getGlp() != "") {
 		String tmp = list_req.getGlp();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("glp: " + tmp);
 	}
-	if (list_req.getSaggio() != null) {
+	if (list_req.getSaggio() != null && list_req.getSaggio() != "") {
 		String tmp = list_req.getSaggio();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("saggio: " + tmp);
 	}
-	if (list_req.getAdministration() != null) {
+	if (list_req.getAdministration() != null && list_req.getAdministration() != "") {
 		String tmp = list_req.getAdministration();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("administration: " + tmp);
 	}
-	if (list_req.getLocation() != null) {
+	if (list_req.getLocation() != null && list_req.getLocation() != "") {
 		String tmp = list_req.getLocation();
-		tmp.replace(" ", "~ ");
-		tmp = tmp + "~";
 		qlist.add("location: " + tmp);
 	}
 	String qstring = String.join(" AND ", qlist);
@@ -298,13 +280,23 @@ public class ClassesManager implements Service {
       for (SolrDocument doc : list) {
           SOPDocument sop = new SOPDocument();
           sop.toSOPDocument(doc);
-          if(sop.getType().equals(type) || type.equals("All")) {
-        	  System.out.println(sop.getType());
+          
+          if(type.equals("All")) {
         	  resultsDoc.add(sop);
           }
-        }
+          else if(type.equals("Paper")) {
+        	  if (sop.getType().equals(type)) {
+        		  resultsDoc.add(sop);
+        	  }
+          }else {
+        	  if(!sop.getType().equals("Paper")) {
+        		  resultsDoc.add(sop);
+        	  }
+          }
+      }
       getlist.setList(resultsDoc.toArray());
       res.setMessage_text("ok");
+      System.out.println("SOP parsed");
       res.setData(getlist);
     } catch (Exception exc) {
       exc.printStackTrace();
@@ -313,6 +305,5 @@ public class ClassesManager implements Service {
     }
     return res;
   }
-  
 
 }

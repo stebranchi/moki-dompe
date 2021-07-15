@@ -11,6 +11,7 @@ public class ClassesManagerRequest {
 	private String date;
 	private String pages;
 	private String isbn;
+	private String numrel;
 	private String doi;
 	private String requester;
 	private String pmcid;
@@ -19,6 +20,7 @@ public class ClassesManagerRequest {
 	private String keywords;
 	private String language;
 	private String journal;
+	private String abstrac;
 	private String cro;
 	private String material;
 	private String documentno;
@@ -90,6 +92,14 @@ public class ClassesManagerRequest {
 		return isbn;
 	}
 
+	public void setNumrel(String numrel) {
+		this.numrel = numrel;
+	}
+
+	public String getNumrel() {
+		return numrel;
+	}
+
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
@@ -152,6 +162,14 @@ public class ClassesManagerRequest {
 	
 	public String getJournal() {
 		return journal;
+	}
+
+	public void setAbstrac(String abstrac) {
+		this.abstrac = abstrac;
+	}
+	
+	public String getAbstrac() {
+		return abstrac;
 	}
 
 	public void setJournal(String journal) {

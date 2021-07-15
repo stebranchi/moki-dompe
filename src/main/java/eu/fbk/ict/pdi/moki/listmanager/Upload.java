@@ -18,8 +18,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -76,7 +79,7 @@ public class Upload implements Service {
 	    } catch( Exception e) {
 	    	
 	    }
-	    final String solrUrl = this.properties.getProperty("solrUrl") + "/solr/Prova";
+	    final String solrUrl = this.properties.getProperty("solrUrl") + "/solr/" + this.properties.getProperty("solrSchema");
 	    this.client = new HttpSolrClient.Builder(solrUrl)
 			    .withConnectionTimeout(100000)
 			    .withSocketTimeout(600000)
@@ -89,6 +92,7 @@ public class Upload implements Service {
 	  public ReturnMessage uploadFile() throws ParserConfigurationException, SAXException, IOException, SolrServerException {
 		  SolrInputDocument input = new SolrInputDocument();
 		  String title = "";
+		  String everything = "";
 		  if (list_req.getXml() != null) {
 			  String xml_tmp = list_req.getXml();
 			  String[] xml_sub = xml_tmp.split("base64,");
@@ -105,69 +109,123 @@ public class Upload implements Service {
 			  if (list_req.getTitle() != null) {
 				  	title = list_req.getTitle();
 					input.addField(LuceneConstants.title, title);
+					everything += title;
 				}
 				if (list_req.getType() != null) {
 					input.addField(LuceneConstants.type, list_req.getType());
+					everything += " " + list_req.getType();
 				}
 				if (list_req.getAuthor() != null) {
 					input.addField(LuceneConstants.author, list_req.getAuthor());
+					everything += " " + list_req.getAuthor();
+				}
+				if (list_req.getAbstrac() != null) {
+					input.addField(LuceneConstants.author, list_req.getAbstrac());
+					everything += " " + list_req.getAbstrac();
 				}
 				if (list_req.getDate() != null) {
 					input.addField(LuceneConstants.date, list_req.getDate());
+					everything += " " + list_req.getDate();
 				}
 				if (list_req.getJournal() != null) {
 					input.addField(LuceneConstants.journal, list_req.getJournal());
+					everything += " " + list_req.getJournal();
 				}
 				if (list_req.getPages() != null) {
 					input.addField(LuceneConstants.pages, list_req.getPages());
+					everything += " " + list_req.getPages();
 				}
 				if (list_req.getIsbn() != null) {
 					input.addField(LuceneConstants.isbn, list_req.getIsbn());
+					everything += " " + list_req.getIsbn();
 				}
 				if (list_req.getDoi() != null) {
 					input.addField(LuceneConstants.doi, list_req.getDoi());
+					everything += " " + list_req.getDoi();
 				}
 				if (list_req.getRequester() != null) {
 					input.addField(LuceneConstants.requester, list_req.getRequester());
+					everything += " " + list_req.getRequester();
 				}
 				if (list_req.getPmcid() != null) {
 					input.addField(LuceneConstants.pmcid, list_req.getPmcid());
+					everything += " " + list_req.getPmcid();
 				}
 				if (list_req.getNotes() != null) {
 					input.addField(LuceneConstants.notes, list_req.getNotes());
+					everything += " " + list_req.getNotes();
 				}
 				if (list_req.getAuthorAddress() != null) {
 					input.addField(LuceneConstants.author_address, list_req.getAuthorAddress());
+					everything += " " + list_req.getAuthorAddress();
 				}
 				if (list_req.getKeywords() != null) {
 					input.addField(LuceneConstants.keywords, list_req.getKeywords());
+					everything += " " + list_req.getKeywords();
 				}
 				if (list_req.getLanguage() != null) {
 					input.addField(LuceneConstants.language, list_req.getLanguage());
+					everything += " " + list_req.getLanguage();
 				}
 				if (list_req.getCro() != null) {
 					input.addField(LuceneConstants.cro, list_req.getCro());
+					everything += " " + list_req.getCro();
 				}
 				if (list_req.getMaterial() != null) {
 					input.addField(LuceneConstants.material, list_req.getMaterial());
+					everything += " " + list_req.getMaterial();
 				}
 				if (list_req.getDocumentno() != null) {
 					input.addField(LuceneConstants.documentno, list_req.getDocumentno());
+					everything += " " + list_req.getDocumentno();
 				}
 				if (list_req.getProject() != null) {
 					input.addField(LuceneConstants.project, list_req.getProject());
+					everything += " " + list_req.getProject();
 				}
 				if (list_req.getGlp() != null) {
 					input.addField(LuceneConstants.glp, list_req.getGlp());
+					everything += " " + list_req.getGlp();
 				}
-				if (list_req.getEssay() != null) {
-					input.addField(LuceneConstants.saggio, list_req.getEssay());
+				if (list_req.getSaggio() != null) {
+					input.addField(LuceneConstants.saggio, list_req.getSaggio());
+					everything += " " + list_req.getSaggio();
 				}
 				if (list_req.getAdministration() != null) {
 					input.addField(LuceneConstants.administration, list_req.getAdministration());
+					everything += " " + list_req.getAdministration();
+				}
+				if (list_req.getDesc_material() != null) {
+					input.addField(LuceneConstants.desc_material, list_req.getDesc_material());
+					everything += " " + list_req.getDesc_material();
+				}
+				if (list_req.getData_arch() != null) {
+					input.addField(LuceneConstants.data_arch, list_req.getData_arch());
+					everything += " " + list_req.getData_arch();
+				}
+				if (list_req.getNum_lotto() != null) {
+					input.addField(LuceneConstants.num_lotto, list_req.getNum_lotto());
+					everything += " " + list_req.getNum_lotto();
+				}
+				if (list_req.getProdotto() != null) {
+					input.addField(LuceneConstants.prodotto, list_req.getProdotto());
+					everything += " " + list_req.getProdotto();
+				}
+				if (list_req.getContainer() != null) {
+					input.addField(LuceneConstants.container, list_req.getContainer());
+					everything += " " + list_req.getContainer();
+				}
+				if (list_req.getFormula() != null) {
+					input.addField(LuceneConstants.formula, list_req.getFormula());
+					everything += " " + list_req.getFormula();
+				}
+				if (list_req.getTipo_studio() != null) {
+					input.addField(LuceneConstants.tipo_studio, list_req.getTipo_studio());
+					everything += " " + list_req.getTipo_studio();
 				}
 				if (list_req.getLocation() != null) {
 					input.addField(LuceneConstants.location, list_req.getLocation());
+					everything += " " + list_req.getLocation();
 				}
 		  }
 		  String pdf = null;
@@ -175,7 +233,7 @@ public class Upload implements Service {
 			  String pdf_tmp = list_req.getPdf();
 		  	  String[] pdf_sub = pdf_tmp.split("base64,");
 		  	  pdf = pdf_sub[1];
-		  	  input = parsePdf(pdf, list_req.getTitle(), input);
+		  	  input = parsePdf(pdf, list_req.getTitle(), input, everything);
 		  }
 		  
 		  java.util.Date dt = new java.util.Date();
@@ -205,43 +263,84 @@ public class Upload implements Service {
 		  NodeList nList = doc.getElementsByTagName("record");
     	  SolrInputDocument document = new SolrInputDocument();
     	  Node nNode = nList.item(0); 
+    	  String everything = "";
     	  if (nNode.getNodeType() == Node.ELEMENT_NODE) {
     		   Element element = (Element) nNode;
-    		   NodeList tmp_title = element.getElementsByTagName("title");
+    		   NodeList tmp_node = element.getElementsByTagName("title");
     		   String title = "";
-    		   if(tmp_title.getLength()>0) {
-    			   title = tmp_title.item(0).getFirstChild().getTextContent();
+    		   if(tmp_node.getLength()>0) {
+    			   title = tmp_node.item(0).getFirstChild().getTextContent();
+    			   everything += title;
     		   }
-    		   NodeList tmp_abstrac = element.getElementsByTagName("abstract");
+    		   tmp_node = element.getElementsByTagName("abstract");
     		   String abstrac = "";
-    		   if(tmp_abstrac.getLength()>0) {
-    			   abstrac = tmp_abstrac.item(0).getFirstChild().getTextContent();
+    		   if(tmp_node.getLength()>0) {
+    			   abstrac = tmp_node.item(0).getFirstChild().getTextContent();
+    			   everything += abstrac;
     		   }
     		   String autori = "";
-    		   NodeList authors = element.getElementsByTagName("author"); 
-    		   for(int i = 0; i < authors.getLength(); i++) {
-    			   autori = autori + authors.item(i).getFirstChild().getTextContent();
+    		   tmp_node = element.getElementsByTagName("author"); 
+    		   for(int i = 0; i < tmp_node.getLength(); i++) {
+    			   autori = autori + tmp_node.item(i).getFirstChild().getTextContent();
+    			   everything += autori;
     		   }
+    		   String pag = "";
+    		   tmp_node = element.getElementsByTagName("pages"); 
+    		   if(tmp_node.getLength()>0) {
+    			   pag = tmp_node.item(0).getFirstChild().getTextContent();
+    			   everything += pag;
+    		   }
+    		   String data = "";
     		   String isbn = "";
-    		   NodeList tmp_isbn = element.getElementsByTagName("isbn");
-    		   if (tmp_isbn.getLength() > 0) {
-    			   isbn = tmp_isbn.item(0).getFirstChild().getTextContent();
-    			   String[] isbn_tmp = isbn.split("[(]");
-    			   isbn = isbn_tmp[0];
-    			   if (isbn_tmp.length > 1) {
-    				   isbn = isbn.substring(0, isbn.length() - 1);
+    		   tmp_node = element.getElementsByTagName("dates"); 
+    		   if(tmp_node.getLength()>0) {
+    			   data = tmp_node.item(0).getTextContent();
+    			   String[] tmp_list = data.split(" - ");
+    			   data = tmp_list[0];
+    			   everything += data;
+    			   if(tmp_list.length > 1) {
+	    			   isbn = tmp_list[1];
+	    			   everything += isbn;
+    			   } else {
+    				   tmp_node = element.getElementsByTagName("isbn"); 
+    	    		   if(tmp_node.getLength()>0) {
+    	    			   isbn = tmp_node.item(0).getFirstChild().getTextContent();
+    	    		   }
     			   }
     		   }
-    	document.addField(LuceneConstants.title, title);
-	    document.addField(LuceneConstants.author, autori);
-	    document.addField(LuceneConstants.isbn, isbn);
-	    document.addField(LuceneConstants.type, type);
-	    document.addField(LuceneConstants.abstrac, abstrac);
-	    }
+    		   String notes = "";
+    		   tmp_node = element.getElementsByTagName("notes"); 
+    		   if(tmp_node.getLength()>0) {
+    			   notes = tmp_node.item(0).getFirstChild().getTextContent();
+    			   everything += notes;
+    		   }
+    		   String auth_add = "";
+    		   tmp_node = element.getElementsByTagName("author-address"); 
+    		   if(tmp_node.getLength()>0) {
+    			   auth_add = tmp_node.item(0).getFirstChild().getTextContent();
+    			   everything += auth_add;
+    		   }
+    		
+    		   java.util.Date dt = new java.util.Date();
+			   java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			   String currentTime = sdf.format(dt);
+	    		   document.addField(LuceneConstants.date_upload, currentTime);
+	    		   document.addField(LuceneConstants.title, title);
+    		       document.addField(LuceneConstants.author, autori);
+	    		   document.addField(LuceneConstants.notes, notes);
+    		       document.addField(LuceneConstants.author_address, auth_add);
+    		       document.addField(LuceneConstants.isbn, isbn);
+    		       document.addField(LuceneConstants.pages, pag);
+    		       document.addField(LuceneConstants.date, data);
+    		       document.addField(LuceneConstants.type, type);
+    		       document.addField(LuceneConstants.abstrac, abstrac);
+    		       document.addField(LuceneConstants.language, "ITA");
+    		       document.addField(LuceneConstants.everything, everything);
+    	  }
     	return document;  
 	  }
 	  
-	  private SolrInputDocument parsePdf(String pdf, String title, SolrInputDocument doc) throws IOException, SolrServerException {
+	  private SolrInputDocument parsePdf(String pdf, String title, SolrInputDocument doc, String everything) throws IOException, SolrServerException {
 		  String file_path = "";
 		  try {
 		  Decoder decoder = Base64.getDecoder();
@@ -274,8 +373,10 @@ public class Upload implements Service {
 	    	  System.out.println("Errore lettura allegato");
 	      }
 		  String url_pdf = "internal-pdf://" + title + ".pdf";
+		  everything += " " + text;
 		  doc.addField(LuceneConstants.urls, url_pdf);
 	      doc.addField(LuceneConstants.fullText, text);
+	      doc.addField(LuceneConstants.everything, everything);
 	      return doc;
 	  }
 	  

@@ -11,6 +11,7 @@ public class LuceneConstants {
   public static final String material = "material";
   public static final String pages = "pages";
   public static final String isbn = "isbn";
+  public static final String numrel = "numrel";
   public static final String doi = "doi";
   public static final String requester = "requester";
   public static final String pmcid = "pmcid";
@@ -27,6 +28,14 @@ public class LuceneConstants {
   public static final String administration = "administration";
   public static final String location = "location";
   public static final String date_upload = "date_upload";
+  public static final String everything = "everything";
+  public static final String desc_material = "desc_material";
+  public static final String data_arch = "data_arch";
+  public static final String num_lotto = "num_lotto";
+  public static final String prodotto = "prodotto";
+  public static final String container = "container";
+  public static final String formula = "formula";
+  public static final String tipo_studio = "tipo_studio";
   
-  public static final int MAX_SEARCH = 2000;
+  public static final int MAX_SEARCH = 3000;
 }

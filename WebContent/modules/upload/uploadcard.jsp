@@ -11,24 +11,29 @@
 			<input type="radio" name="type_upload" value="Paper" ng-model="type_upload" checked>
 	    	<label for="typeChoice1">Paper</label>
 	    	<input type="radio" name="type_upload" value="Preclinical_Trial" ng-model="type_upload">
-	    	<label for="typeChoice2">Trial Preclinico</label>
+	    	<label for="typeChoice2">Preclinical Trial</label>
 	    	<input type="radio" name="type_upload" value="Clinical_Trial" ng-model="type_upload">
-	    	<label for="typeChoice3">Trial Clinico</label>
+	    	<label for="typeChoice3">Clinical Trial</label>
 	    	<br/>
+	    	<div ng-show = "type_upload === 'Paper'">
 	    	<label>XML File:</label>
-		    <input type="file" name="file_xml" fileread="xml" label="File xml"/>
-	    	<br/>
+		    <input type="file" custom-on-change="notempty" accept="file/csv" name="file_xml" fileread="xml" label="File xml"/>
+	    	</div>
+	    	<div ng-show = "empty == true">
 	    	<label>Title:</label>
 	    	<input type="text" name="title" ng-model="title" placeholder="Enter the title of the document" required/>
 	    	<br/>
 	    	<label>Authors:</label>
 		    <input type="text" name="author" ng-model="author" placeholder="Enter authors of the document"/>
 		    <br/>
-		    <label>Date</label>
 		    <label for="date">Date:</label>
 			<input type="date" id="date" name="date">
 			<br/>
-			<div ng-if="type_upload === 'Paper'">
+			<br/>
+		    <label for="abstract">Abstract:</label>
+			<input type="text"id="abstract" name="abstract" placeholder="Enter abstract of the document"/>
+			<br/>
+			<div ng-show="type_upload === 'Paper'">
 				<label>Pages:</label>
 				<input type="text" name="pages" ng-model="pages" placeholder="Enter number of pages of the article"/>
 				<br/>
@@ -48,7 +53,10 @@
 				<input type="text" name="pmcid" ng-model="pmcid" placeholder="Enter PMCID of the article"/>
 				<br/>
 			</div>
-			<div ng-if="type_upload !== 'Paper'">
+			<div ng-show="type_upload !== 'Paper'">
+				<label>Relation number:</label>
+				<input type="text" name="numrel" ng-model="numrel" placeholder="Enter Relation Number"/>
+				<br/>
 				<label>CRO:</label>
 				<input type="text" name="cro" ng-model="cro" placeholder="Enter Institution/CRO name"/>
 				<br/>
@@ -73,6 +81,27 @@
 				<label>Location:</label>
 				<input type="text" name="location" ng-model="location" placeholder="Enter alphanumeric code for locating the document"/>
 				<br/>
+				<label>Material Description:</label>
+				<input type="text" name="desc_material" ng-model="desc_material" placeholder="Enter Material Description for the document"/>
+				<br/>
+				<label>Archiviation Date:</label>
+				<input type="text" name="data_arch" ng-model="data_arch" placeholder="Enter archiviation date of the document"/>
+				<br/>
+				<label>Lotto Number:</label>
+				<input type="text" name="num_lotto" ng-model="num_lotto" placeholder="Enter lotto number of the document"/>
+				<br/>
+				<label>Product:</label>
+				<input type="text" name="prodotto" ng-model="prodotto" placeholder="Enter product of the document"/>
+				<br/>
+				<label>Container:</label>
+				<input type="text" name="container" ng-model="container" placeholder="Enter container of the document"/>
+				<br/>
+				<label>Formula:</label>
+				<input type="text" name="formula" ng-model="formula" placeholder="Enter formula of the document"/>
+				<br/>
+				<label>Study Type:</label>
+				<input type="text" name="tipo_studio" ng-model="tipo_studio" placeholder="Enter study type of the document"/>
+				<br/>
 			</div>
 			<label>Notes:</label>
 			<input type="text" name="notes" ng-model="notes" placeholder="Enter Notes"/>
@@ -86,6 +115,7 @@
 			<label>Language:</label>
 			<input type="text" name="language" ng-model="language" placeholder="Enter the language of the document's content"/>
 			<br/>
+			</div>
 		    <label>Attachment:</label>
 		    <input type="file" name="file_pdf" fileread="pdf"/>
 		    <input type="submit" value="Upload">

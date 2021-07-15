@@ -16,6 +16,7 @@ app.controller("getListController",
 	var search;
 	var self = this;
 	var data;
+	$scope.results = -1;
 	$scope.type_advanced = "All";
 	$scope.type_search = "All";
 	index_active = -1;
@@ -92,37 +93,6 @@ app.controller("getListController",
 //	Function for searching as a free text in 1 or more specific section
 	$scope.AdvancedSearch = function(){
 		search = $scope.sectiontext;
-		if ($scope.type === "Paper"){
-			req = {
-					method: 'POST',
-					url: 'RequestManager',
-					headers: {
-					  'Content-Type': "multipart/form-data"
-					},
-					data: {
-					"serviceName": "ClassesManager",
-					"locationService": "listmanager",
-					"data" : {
-						"mode": "advancedSearch",
-						"title": $scope.title,
-						"type": $scope.type_advanced,
-						"author": $scope.author,
-						"date": $scope.date,
-						"pages": $scope.pages,
-						"journal": $scope.journal,
-						"isbn": $scope.isbn,
-						"doi": $scope.doi,
-						"requester": $scope.requester,
-						"pmcid": $scope.pmcid,
-						"notes": $scope.notes,
-						"author_address": $scope.author_address,
-						"keywords": $scope.keywords,
-						"language": $scope.language
-					}
-				}
-			}
-		}
-		else{
 			req = {
 					method: 'POST',
 					url: 'RequestManager',
@@ -140,9 +110,17 @@ app.controller("getListController",
 						"date": $scope.date,
 						"cro": $scope.cro,
 						"material": $scope.material,
+						"abstrac": $scope.abstract,
+						"numrel": $scope.numrel,
 						"documentno": $scope.documentno,
 						"project": $scope.project,
 						"glp": $scope.glp,
+						"pages": $scope.pages,
+						"journal": $scope.journal,
+						"isbn": $scope.isbn,
+						"doi": $scope.doi,
+						"requester": $scope.requester,
+						"pmcid": $scope.pmcid,
 						"saggio": $scope.saggio,
 						"administration": $scope.administration,
 						"location": $scope.location,
@@ -153,13 +131,12 @@ app.controller("getListController",
 					}
 				}
 			}
-		}
 		
 	$http(req)
 		.then(function(response){
 			getdata = response.data.data;
         	data = getdata.list;
-        	
+        	$scope.results = data.length;
         	//create the table
         	self.tableParams = new NgTableParams({ count: 10}, { counts: [5, 10, 25], dataset: data});
         	console.log(data);
@@ -199,7 +176,7 @@ app.controller("getListController",
 				startTime = new Date();
 				getdata = response.data.data;
 	        	data = getdata.list;
-	        	console.log(response.data);
+	        	$scope.results = data.length;
 	        	//create the table
 	        	
 	        	self.tableParams = new NgTableParams({ count: 10}, { counts: [5, 10, 25], dataset: data});
@@ -263,12 +240,13 @@ app.controller("getListController",
     	
     }
     
-    //this function create a new tab
-    /*$scope.show_pdf = function(e){
+   //this function opens attachment on new internet tab
+    $scope.show_pdf = function(e){
     	path = e.replace("internal-pdf://", "");
     	$window.open('../pdfs/' + path);
-    }*/
+    }
     
+    //this function create a new tab
     $scope.new_tab = function(e) {
     	
     	isPresent = false;
@@ -296,7 +274,7 @@ app.controller("getListController",
     	
     	//if the tab is present we don't create a new one
     	for (i = 0; i < $scope.tabs.length; i++) {
-    		if($scope.tabs[i].id === e.id) {
+    		if($scope.tabs[i].title === e.title) {
     			isPresent = true;
     			//go to the tab selected by the user
     			$scope.go(i);
@@ -310,21 +288,43 @@ app.controller("getListController",
     		for (i = 0; i < urlsArray.length; i++){
     			urlsArray[i] = urlsArray[i].trim();
     		}
+    		var authors = e.author.split(" - ");
     	
 	    	element = {
 	    			"title": e.title,
+	    			"date": e.date,
+	    			"date_upload": e.date_upload,
 	    			'paneId': 'tab' + $scope.tabs.length,
-	    			"isbn": e.code,
+	    			"isbn": e.isbn,
 	    			"active": "",
-	    			"authors": e.authors,
+	    			"author": authors,
 	    			"abstract": e.abstrac,
 	    			"urls": urlsArray,
-	    			"materiale": e.materiale,
-	    			"conten": e.conten,
-	    			"numlot": e.numlot,
-	    			"testata": e.testata,
-	    			"numstud": e.numstud,
-	    			"desc2": e.descmater2,
+	    			"material": e.material,
+	    			"pages": e.pages,
+	    			"journal": e.journal,
+	    			"numrel": e.numrel,
+	    			"doi": e.doi,
+	    			"requester": e.requester,
+	    			"pmcid": e.pmcid,
+	    			"cro": e.cro,
+	    			"documentno": e.documentno,
+	    			"project": e.project,
+	    			"glp": e.glp,
+	    			"saggio": e.saggio,
+	    			"administration": e.administration,
+	    			"location": e.location,
+	    			"author_address": e.author_address,
+	    			"notes": e.notes,
+	    			"type": e.type,
+	    			"desc_material": e.desc_material,
+	    			"data_arch": e.data_arch,
+	    			"num_lotto": e.num_lotto,
+	    			"prodotto": e.prodotto,
+	    			"container": e.container,
+	    			"formula": e.formula,
+	    			"keywords": e.keywords,
+	    			"tipo_studio": e.tipo_studio,
 	    	}
 			
 	    	

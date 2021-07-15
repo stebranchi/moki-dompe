@@ -11,6 +11,7 @@ public class UploadRequest {
 	private String date;
 	private String pages;
 	private String isbn;
+	private String numrel;
 	private String doi;
 	private String requester;
 	private String pmcid;
@@ -19,15 +20,87 @@ public class UploadRequest {
 	private String keywords;
 	private String language;
 	private String journal;
+	private String abstrac;
 	private String cro;
 	private String material;
 	private String documentno;
 	private String project;
 	private String glp;
-	private String essay;
+	private String saggio;
 	private String administration;
 	private String location;
+	private String desc_material;
+	private String data_arch;
+	private String num_lotto;
+	private String prodotto;
+	private String container;
+	private String formula;
+	private String tipo_studio;
 	
+	public String getTipo_studio() {
+		return tipo_studio;
+	}
+
+	public void setTipo_studio(String tipo_studio) {
+		this.tipo_studio = tipo_studio;
+	}
+
+	public String getAuthor_address() {
+		return author_address;
+	}
+
+	public void setAuthor_address(String author_address) {
+		this.author_address = author_address;
+	}
+
+	public String getDesc_material() {
+		return desc_material;
+	}
+
+	public void setDesc_material(String desc_material) {
+		this.desc_material = desc_material;
+	}
+
+	public String getData_arch() {
+		return data_arch;
+	}
+
+	public void setData_arch(String data_arch) {
+		this.data_arch = data_arch;
+	}
+
+	public String getNum_lotto() {
+		return num_lotto;
+	}
+
+	public void setNum_lotto(String num_lotto) {
+		this.num_lotto = num_lotto;
+	}
+
+	public String getProdotto() {
+		return prodotto;
+	}
+
+	public void setProdotto(String prodotto) {
+		this.prodotto = prodotto;
+	}
+
+	public String getContainer() {
+		return container;
+	}
+
+	public void setContainer(String container) {
+		this.container = container;
+	}
+
+	public String getFormula() {
+		return formula;
+	}
+
+	public void setFormula(String formula) {
+		this.formula = formula;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -62,6 +135,14 @@ public class UploadRequest {
 
 	public String getIsbn() {
 		return isbn;
+	}
+
+	public void setNumrel(String numrel) {
+		this.numrel = numrel;
+	}
+
+	public String getNumrel() {
+		return numrel;
 	}
 
 	public void setIsbn(String isbn) {
@@ -128,6 +209,14 @@ public class UploadRequest {
 		return journal;
 	}
 
+	public void setAbstrac(String abstrac) {
+		this.abstrac = abstrac;
+	}
+	
+	public String getAbstrac() {
+		return abstrac;
+	}
+
 	public void setJournal(String journal) {
 		this.journal = journal;
 	}
@@ -172,12 +261,12 @@ public class UploadRequest {
 		this.glp = glp;
 	}
 
-	public String getEssay() {
-		return essay;
+	public String getSaggio() {
+		return saggio;
 	}
 
-	public void setEssay(String essay) {
-		this.essay = essay;
+	public void setSaggio(String saggio) {
+		this.saggio = saggio;
 	}
 
 	public String getAdministration() {

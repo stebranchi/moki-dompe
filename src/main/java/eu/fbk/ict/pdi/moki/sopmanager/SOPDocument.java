@@ -8,6 +8,7 @@ public class SOPDocument {
 	private String id;
 	private String title;
 	private String isbn;
+	private String numrel;
 	private String author;
 	private String fullText;
 	private String urls;
@@ -31,7 +32,98 @@ public class SOPDocument {
 	private String administration;
 	private String location;
 	private String date_upload;
+	private String desc_material;
+	private String data_arch;
+	private String num_lotto;
+	private String prodotto;
+	private String container;
+	private String formula;
+	private String tipo_studio;
   
+
+
+	public String getDesc_material() {
+		return desc_material;
+	}
+
+
+
+	public void setDesc_material(String desc_material) {
+		this.desc_material = desc_material;
+	}
+
+
+
+	public String getData_arch() {
+		return data_arch;
+	}
+
+
+
+	public void setData_arch(String data_arch) {
+		this.data_arch = data_arch;
+	}
+
+
+
+	public String getNum_lotto() {
+		return num_lotto;
+	}
+
+
+
+	public void setNum_lotto(String num_lotto) {
+		this.num_lotto = num_lotto;
+	}
+
+
+
+	public String getProdotto() {
+		return prodotto;
+	}
+
+
+
+	public void setProdotto(String prodotto) {
+		this.prodotto = prodotto;
+	}
+
+
+
+	public String getContainer() {
+		return container;
+	}
+
+
+
+	public void setContainer(String container) {
+		this.container = container;
+	}
+
+
+
+	public String getFormula() {
+		return formula;
+	}
+
+
+
+	public void setFormula(String formula) {
+		this.formula = formula;
+	}
+
+
+
+	public String getTipo_studio() {
+		return tipo_studio;
+	}
+
+
+
+	public void setTipo_studio(String tipo_studio) {
+		this.tipo_studio = tipo_studio;
+	}
+
 
 
 	public String getId() {
@@ -66,6 +158,18 @@ public class SOPDocument {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+
+
+	public String getNumrel() {
+		return numrel;
+	}
+
+
+
+	public void setNumrel(String numrel) {
+		this.numrel = numrel;
 	}
 
 
@@ -349,6 +453,7 @@ public class SOPDocument {
 public SOPDocument toSOPDocument(SolrDocument doc) {
 	    this.title = (doc.getFieldValue(LuceneConstants.title) != null) ? doc.getFieldValue(LuceneConstants.title).toString().substring(1, (doc.getFieldValue(LuceneConstants.title).toString().length()-1)) : "";
 	    this.isbn = (doc.getFieldValue(LuceneConstants.isbn) != null) ? doc.getFieldValue(LuceneConstants.isbn).toString().substring(1, (doc.getFieldValue(LuceneConstants.isbn).toString().length()-1)) : "";
+	    this.numrel = (doc.getFieldValue(LuceneConstants.numrel) != null) ? doc.getFieldValue(LuceneConstants.numrel).toString().substring(1, (doc.getFieldValue(LuceneConstants.numrel).toString().length()-1)) : "";
 	    this.author = (doc.getFieldValue(LuceneConstants.author) != null) ? doc.getFieldValue(LuceneConstants.author).toString().substring(1, (doc.getFieldValue(LuceneConstants.author).toString().length()-1)) : "";
 	    this.fullText = (doc.getFieldValue(LuceneConstants.fullText) != null) ? doc.getFieldValue(LuceneConstants.fullText).toString().substring(1, (doc.getFieldValue(LuceneConstants.fullText).toString().length()-1)) : "";
 	    this.urls = (doc.getFieldValue(LuceneConstants.urls) != null) ? doc.getFieldValue(LuceneConstants.urls).toString().substring(1, (doc.getFieldValue(LuceneConstants.urls).toString().length()-1)) : "";
@@ -372,6 +477,13 @@ public SOPDocument toSOPDocument(SolrDocument doc) {
 	    this.administration = (doc.getFieldValue(LuceneConstants.administration) != null) ? doc.getFieldValue(LuceneConstants.administration).toString().substring(1, (doc.getFieldValue(LuceneConstants.administration).toString().length()-1)) : "";
 	    this.location = (doc.getFieldValue(LuceneConstants.location) != null) ? doc.getFieldValue(LuceneConstants.location).toString().substring(1, (doc.getFieldValue(LuceneConstants.location).toString().length()-1)) : "";
 	    this.date_upload = (doc.getFieldValue(LuceneConstants.date_upload) != null) ? doc.getFieldValue(LuceneConstants.date_upload).toString().substring(1, (doc.getFieldValue(LuceneConstants.date_upload).toString().length()-1)) : "";
+	    this.desc_material = (doc.getFieldValue(LuceneConstants.desc_material) != null) ? doc.getFieldValue(LuceneConstants.desc_material).toString().substring(1, (doc.getFieldValue(LuceneConstants.desc_material).toString().length()-1)) : "";
+	    this.data_arch = (doc.getFieldValue(LuceneConstants.data_arch) != null) ? doc.getFieldValue(LuceneConstants.data_arch).toString().substring(1, (doc.getFieldValue(LuceneConstants.data_arch).toString().length()-1)) : "";
+	    this.num_lotto = (doc.getFieldValue(LuceneConstants.num_lotto) != null) ? doc.getFieldValue(LuceneConstants.num_lotto).toString().substring(1, (doc.getFieldValue(LuceneConstants.num_lotto).toString().length()-1)) : "";
+	    this.prodotto = (doc.getFieldValue(LuceneConstants.prodotto) != null) ? doc.getFieldValue(LuceneConstants.prodotto).toString().substring(1, (doc.getFieldValue(LuceneConstants.prodotto).toString().length()-1)) : "";
+	    this.container = (doc.getFieldValue(LuceneConstants.container) != null) ? doc.getFieldValue(LuceneConstants.container).toString().substring(1, (doc.getFieldValue(LuceneConstants.container).toString().length()-1)) : "";
+	    this.formula = (doc.getFieldValue(LuceneConstants.formula) != null) ? doc.getFieldValue(LuceneConstants.formula).toString().substring(1, (doc.getFieldValue(LuceneConstants.formula).toString().length()-1)) : "";
+	    this.tipo_studio = (doc.getFieldValue(LuceneConstants.tipo_studio) != null) ? doc.getFieldValue(LuceneConstants.tipo_studio).toString().substring(1, (doc.getFieldValue(LuceneConstants.tipo_studio).toString().length()-1)) : "";
 
 	    return this;
   }
